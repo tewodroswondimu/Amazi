@@ -25,6 +25,13 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // Setup the data source and delegate of the collection view
+        self.menuCollectionView.dataSource = self
+        self.menuCollectionView.delegate = self
+        
+        // show feature points and the world origin when the application loads up
+        sceneView.debugOptions = [ARSCNDebugOptions.showWorldOrigin, ARSCNDebugOptions.showFeaturePoints];
+        
         // enable horizontal plane detection
         configuration.planeDetection = .horizontal;
         
