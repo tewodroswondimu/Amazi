@@ -12,6 +12,7 @@
 		187FFAB41FA895BB001B1B3F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 187FFAB21FA895BB001B1B3F /* Main.storyboard */; };
 		187FFAB61FA895BB001B1B3F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 187FFAB51FA895BB001B1B3F /* Assets.xcassets */; };
 		187FFAB91FA895BB001B1B3F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 187FFAB71FA895BB001B1B3F /* LaunchScreen.storyboard */; };
+		187FFAC11FA898AD001B1B3F /* menuCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 187FFAC01FA898AD001B1B3F /* menuCollectionViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +23,7 @@
 		187FFAB51FA895BB001B1B3F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		187FFAB81FA895BB001B1B3F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		187FFABA1FA895BB001B1B3F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		187FFAC01FA898AD001B1B3F /* menuCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = menuCollectionViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +58,7 @@
 			children = (
 				187FFAAE1FA895BB001B1B3F /* AppDelegate.swift */,
 				187FFAB01FA895BB001B1B3F /* ViewController.swift */,
+				187FFAC01FA898AD001B1B3F /* menuCollectionViewCell.swift */,
 				187FFAB21FA895BB001B1B3F /* Main.storyboard */,
 				187FFAB51FA895BB001B1B3F /* Assets.xcassets */,
 				187FFAB71FA895BB001B1B3F /* LaunchScreen.storyboard */,
@@ -138,6 +141,7 @@
 			files = (
 				187FFAB11FA895BB001B1B3F /* ViewController.swift in Sources */,
 				187FFAAF1FA895BB001B1B3F /* AppDelegate.swift in Sources */,
+				187FFAC11FA898AD001B1B3F /* menuCollectionViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
