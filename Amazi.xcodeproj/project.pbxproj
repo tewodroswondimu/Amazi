@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		186792101FA8B46A0012EC7D /* Model.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = 186792061FA8A9EB0012EC7D /* Model.scnassets */; };
+		186792111FA8B4B80012EC7D /* Solar.scn in Resources */ = {isa = PBXBuildFile; fileRef = 1867920F1FA8B2050012EC7D /* Solar.scn */; };
 		187FFAAF1FA895BB001B1B3F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 187FFAAE1FA895BB001B1B3F /* AppDelegate.swift */; };
 		187FFAB11FA895BB001B1B3F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 187FFAB01FA895BB001B1B3F /* ViewController.swift */; };
 		187FFAB41FA895BB001B1B3F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 187FFAB21FA895BB001B1B3F /* Main.storyboard */; };
@@ -16,6 +18,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		186792061FA8A9EB0012EC7D /* Model.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = Model.scnassets; sourceTree = "<group>"; };
+		1867920E1FA8B13D0012EC7D /* Textures */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Textures; sourceTree = "<group>"; };
+		1867920F1FA8B2050012EC7D /* Solar.scn */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; name = Solar.scn; path = Model.scnassets/Solar.scn; sourceTree = "<group>"; };
 		187FFAAB1FA895BB001B1B3F /* Amazi.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Amazi.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		187FFAAE1FA895BB001B1B3F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		187FFAB01FA895BB001B1B3F /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -56,9 +61,12 @@
 		187FFAAD1FA895BB001B1B3F /* Amazi */ = {
 			isa = PBXGroup;
 			children = (
+				1867920F1FA8B2050012EC7D /* Solar.scn */,
+				1867920E1FA8B13D0012EC7D /* Textures */,
 				187FFAAE1FA895BB001B1B3F /* AppDelegate.swift */,
 				187FFAB01FA895BB001B1B3F /* ViewController.swift */,
 				187FFAC01FA898AD001B1B3F /* menuCollectionViewCell.swift */,
+				186792061FA8A9EB0012EC7D /* Model.scnassets */,
 				187FFAB21FA895BB001B1B3F /* Main.storyboard */,
 				187FFAB51FA895BB001B1B3F /* Assets.xcassets */,
 				187FFAB71FA895BB001B1B3F /* LaunchScreen.storyboard */,
@@ -127,8 +135,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				187FFAB91FA895BB001B1B3F /* LaunchScreen.storyboard in Resources */,
+				186792101FA8B46A0012EC7D /* Model.scnassets in Resources */,
 				187FFAB61FA895BB001B1B3F /* Assets.xcassets in Resources */,
 				187FFAB41FA895BB001B1B3F /* Main.storyboard in Resources */,
+				186792111FA8B4B80012EC7D /* Solar.scn in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

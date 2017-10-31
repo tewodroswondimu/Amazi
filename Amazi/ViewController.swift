@@ -9,9 +9,9 @@
 import UIKit
 import ARKit
 
-class ViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
+class ViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, ARSCNViewDelegate {
     // All the menu items
-    let menuArray: [String] = ["Well", "Drip", "Solar"]
+    let menuArray: [String] = ["Well", "Drip", "Solar", "vase"]
     var selectedItem: String?
     
     // Outlets for the different elements
@@ -37,6 +37,50 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         
         // Run the configuration on the sceneView Session
         self.sceneView.session.run(configuration);
+        
+        // Set up to recognize gesture
+        self.registerGestureRecognizer()
+    }
+    
+    
+    func registerGestureRecognizer() {
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(tapped))
+        self.sceneView.addGestureRecognizer(tapGestureRecognizer)
+    }
+    
+    // taps on a plane
+    @objc func tapped(sender: UITapGestureRecognizer) {
+        let sceneView = sender.view as! ARSCNView
+        let tapLocation = sender.location(in: sceneView)
+        
+        let hitTest = sceneView.hitTest(tapLocation, types: .existingPlaneUsingExtent)
+        if (!hitTest.isEmpty) {
+            print("touched a horizontal surface")
+            addItem(hitTestResult: hitTest.first!)
+        }
+        else {
+            print("No match")
+        }
+    }
+    
+    // Add the terrain to a plane when the application starts
+    func addItem(hitTestResult: ARHitTestResult) {
+        // find out the item is currently selected
+        if let selectedItem = self.selectedItem {
+            let scene = SCNScene(named: "Model.scnassets/\(selectedItem).scn")
+            
+            let node = (scene?.rootNode.childNode(withName: selectedItem, recursively: false))!
+            
+            // encodes information
+            let transform = hitTestResult.worldTransform
+            
+            // position of the horizontal surface
+            let thirdColumn = transform.columns.3
+            
+            node.position = SCNVector3(thirdColumn.x, thirdColumn.y, thirdColumn.z)
+            
+            self.sceneView.scene.rootNode.addChildNode(node)
+        }
     }
     
     // When ever a button is pressed you change the background to the color green
@@ -71,6 +115,10 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         cell.collectionViewLabel.text = self.menuArray[indexPath.row]
         
         return cell
+    }
+    
+    func renderer(_ renderer: SCNSceneRenderer, didAdd node: SCNNode, for anchor: ARAnchor) {
+        guard anchor is ARPlaneAnchor else {return}
     }
 
     override func didReceiveMemoryWarning() {
