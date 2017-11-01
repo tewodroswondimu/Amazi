@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1858B42C1FAA3CAB0066CABE /* ThresholdPanGesture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1858B42A1FAA3B930066CABE /* ThresholdPanGesture.swift */; };
+		1858B42D1FAA3CAD0066CABE /* VirtualObjectARView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1858B42B1FAA3BFF0066CABE /* VirtualObjectARView.swift */; };
+		1858B42E1FAA3CB00066CABE /* VirtualObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1858B4291FAA3B880066CABE /* VirtualObject.swift */; };
+		1858B4301FAA3DD20066CABE /* VirtualObjectInteraction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1858B42F1FAA3DD20066CABE /* VirtualObjectInteraction.swift */; };
 		186792101FA8B46A0012EC7D /* Model.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = 186792061FA8A9EB0012EC7D /* Model.scnassets */; };
 		186792111FA8B4B80012EC7D /* Solar.scn in Resources */ = {isa = PBXBuildFile; fileRef = 1867920F1FA8B2050012EC7D /* Solar.scn */; };
 		187FFAAF1FA895BB001B1B3F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 187FFAAE1FA895BB001B1B3F /* AppDelegate.swift */; };
@@ -19,6 +23,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1858B4291FAA3B880066CABE /* VirtualObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VirtualObject.swift; sourceTree = "<group>"; };
+		1858B42A1FAA3B930066CABE /* ThresholdPanGesture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThresholdPanGesture.swift; sourceTree = "<group>"; };
+		1858B42B1FAA3BFF0066CABE /* VirtualObjectARView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VirtualObjectARView.swift; sourceTree = "<group>"; };
+		1858B42F1FAA3DD20066CABE /* VirtualObjectInteraction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VirtualObjectInteraction.swift; sourceTree = "<group>"; };
 		186792061FA8A9EB0012EC7D /* Model.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = Model.scnassets; sourceTree = "<group>"; };
 		1867920E1FA8B13D0012EC7D /* Textures */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Textures; sourceTree = "<group>"; };
 		1867920F1FA8B2050012EC7D /* Solar.scn */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; name = Solar.scn; path = Model.scnassets/Solar.scn; sourceTree = "<group>"; };
@@ -43,6 +51,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1858B4281FAA3B750066CABE /* Moving */ = {
+			isa = PBXGroup;
+			children = (
+				1858B42F1FAA3DD20066CABE /* VirtualObjectInteraction.swift */,
+				1858B42A1FAA3B930066CABE /* ThresholdPanGesture.swift */,
+				1858B42B1FAA3BFF0066CABE /* VirtualObjectARView.swift */,
+				1858B4291FAA3B880066CABE /* VirtualObject.swift */,
+			);
+			path = Moving;
+			sourceTree = "<group>";
+		};
 		187FFAA21FA895BB001B1B3F = {
 			isa = PBXGroup;
 			children = (
@@ -62,6 +81,7 @@
 		187FFAAD1FA895BB001B1B3F /* Amazi */ = {
 			isa = PBXGroup;
 			children = (
+				1858B4281FAA3B750066CABE /* Moving */,
 				1867920F1FA8B2050012EC7D /* Solar.scn */,
 				1867920E1FA8B13D0012EC7D /* Textures */,
 				187FFAAE1FA895BB001B1B3F /* AppDelegate.swift */,
@@ -151,9 +171,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1858B4301FAA3DD20066CABE /* VirtualObjectInteraction.swift in Sources */,
 				187FFAB11FA895BB001B1B3F /* ViewController.swift in Sources */,
 				187FFAAF1FA895BB001B1B3F /* AppDelegate.swift in Sources */,
+				1858B42E1FAA3CB00066CABE /* VirtualObject.swift in Sources */,
+				1858B42D1FAA3CAD0066CABE /* VirtualObjectARView.swift in Sources */,
 				187FFAC11FA898AD001B1B3F /* menuCollectionViewCell.swift in Sources */,
+				1858B42C1FAA3CAB0066CABE /* ThresholdPanGesture.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -9,7 +9,7 @@
 import UIKit
 import ARKit
 
-class ViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, ARSCNViewDelegate {
+class ViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UIGestureRecognizerDelegate, ARSCNViewDelegate {
     
     // All the menu items
     let menuArray: [String] = ["Well", "Drip", "Solar", "vase"]
@@ -22,8 +22,26 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     @IBOutlet weak var statusLabel: UILabel!
     
     // Properties
-    // A property to record the last rotated state of an object
-    var lastRotation: CGFloat = 0
+    var lastRotation: CGFloat = 0 // A property to record the last rotated state of an object
+    
+    /**
+     The object that has been most recently intereacted with.
+     The `selectedObject` can be moved at any time with the tap gesture.
+     */
+    var selectedObject: VirtualObject?
+    /// The object that is tracked for use by the pan and rotation gestures.
+    private var trackedObject: VirtualObject? {
+        didSet {
+            guard trackedObject != nil else { return }
+            selectedObject = trackedObject
+        }
+    }
+    
+    /// The scene view to hit test against when moving virtual content.
+    var virtualObjectSceneView: VirtualObjectInteraction
+    
+    /// The tracked screen position used to update the `trackedObject`'s position in `updateObjectToCurrentTrackingPosition()`.
+    private var currentTrackingPosition: CGPoint?
     
     // Configuration
     let configuration = ARWorldTrackingConfiguration()
@@ -35,6 +53,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         self.menuCollectionView.dataSource = self
         self.menuCollectionView.delegate = self
         
+        self.virtualObjectSceneView = VirtualObjectInteraction(sceneView: sceneView)
         self.sceneView.delegate = self
         
         // show feature points and the world origin when the application loads up
@@ -56,16 +75,98 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         // Allows to detect tap gestures
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(tapped))
         
-        // Allows to detect pinch gestures 
+        // Allows to detect pinch gestures
         let pinchGestureRecognizer = UIPinchGestureRecognizer(target: self, action: #selector(pinched))
         
         // Allows to detect rotate gestures
         let rotateGestureRecognizer = UIRotationGestureRecognizer(target: self, action: #selector(rotated))
         
+        // Allows to detect pan gestures
+        let panGestureRecognizer = ThresholdPanGesture(target: self, action: #selector(didPan(_:)))
+        panGestureRecognizer.delegate = self
+        
         // Add all the gesture recognizers to the sceneView
         self.sceneView.addGestureRecognizer(tapGestureRecognizer)
         self.sceneView.addGestureRecognizer(pinchGestureRecognizer)
         self.sceneView.addGestureRecognizer(rotateGestureRecognizer)
+        self.sceneView.addGestureRecognizer(panGestureRecognizer)
+    }
+    
+    @objc
+    func didPan(_ gesture: ThresholdPanGesture) {
+        switch gesture.state {
+        case .began:
+            // Check for interaction with a new object.
+            if let object = objectInteracting(with: gesture, in: sceneView) {
+                trackedObject = object
+            }
+            
+        case .changed where gesture.isThresholdExceeded:
+            guard let object = trackedObject else { return }
+            let translation = gesture.translation(in: sceneView)
+            
+            let currentPosition = currentTrackingPosition ?? CGPoint(sceneView.projectPoint(object.position))
+            
+            // The `currentTrackingPosition` is used to update the `selectedObject` in `updateObjectToCurrentTrackingPosition()`.
+            currentTrackingPosition = CGPoint(x: currentPosition.x + translation.x, y: currentPosition.y + translation.y)
+            
+            gesture.setTranslation(.zero, in: sceneView)
+            
+        case .changed:
+            // Ignore changes to the pan gesture until the threshold for displacment has been exceeded.
+            break
+            
+        default:
+            // Clear the current position tracking.
+            currentTrackingPosition = nil
+            trackedObject = nil
+        }
+    }
+    
+    /**
+     If a drag gesture is in progress, update the tracked object's position by
+     converting the 2D touch location on screen (`currentTrackingPosition`) to
+     3D world space.
+     This method is called per frame (via `SCNSceneRendererDelegate` callbacks),
+     allowing drag gestures to move virtual objects regardless of whether one
+     drags a finger across the screen or moves the device through space.
+     - Tag: updateObjectToCurrentTrackingPosition
+     */
+    @objc
+    func updateObjectToCurrentTrackingPosition() {
+        guard let object = trackedObject, let position = currentTrackingPosition else { return }
+        translate(object, basedOn: position, infinitePlane: true)
+    }
+    
+    /// - Tag: DragVirtualObject
+    private func translate(_ object: VirtualObject, basedOn screenPos: CGPoint, infinitePlane: Bool) {
+        guard let cameraTransform = sceneView.session.currentFrame?.camera.transform,
+            let (position, _, isOnPlane) = virtualObjectSceneView.worldPosition(fromScreenPosition: screenPos,
+                                                                   objectPosition: object.simdPosition,
+                                                                   infinitePlane: infinitePlane) else { return }
+        
+        /*
+         Plane hit test results are generally smooth. If we did *not* hit a plane,
+         smooth the movement to prevent large jumps.
+         */
+        object.setPosition(position, relativeTo: cameraTransform, smoothMovement: !isOnPlane)
+    }
+    
+    
+    /// A helper method to return the first object that is found under the provided `gesture`s touch locations.
+    /// - Tag: TouchTesting
+    private func objectInteracting(with gesture: UIGestureRecognizer, in view: ARSCNView) -> VirtualObject? {
+        for index in 0..<gesture.numberOfTouches {
+            let touchLocation = gesture.location(ofTouch: index, in: view)
+            
+            // Look for an object directly under the `touchLocation`.
+            if let object = virtualObjectSceneView.virtualObject(at: touchLocation) {
+                return object
+            }
+        }
+        
+        // As a last resort look for an object under the center of the touches.
+        return virtualObjectSceneView.virtualObject(at: gesture.center(in: view))
     }
     
     // method for when a person rotates an object in the scene
@@ -91,7 +192,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
             var originalRotation = CGFloat()
             if sender.state == .began {
                 sender.rotation = lastRotation
-
+                
                 // stores the rotation at the time when the view is about to begin rotating.
                 originalRotation = sender.rotation
             } else if sender.state == .changed {
@@ -241,7 +342,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
             }
         }
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
