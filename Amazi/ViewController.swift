@@ -87,34 +87,11 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
             // get the node from the result
             let node = results.node
             
-            // Original rotation stores the rotation when the object begins rotating
-            var originalRotation = CGFloat()
-            if sender.state == .began {
-                sender.rotation = lastRotation
-
-                // stores the rotation at the time when the view is about to begin rotating.
-                originalRotation = sender.rotation
-            } else if sender.state == .changed {
-                var newRotation: CGFloat = 0.0
+            if sender.state == .changed {
+                node.eulerAngles.y -= Float(sender.rotation)
                 
-                // Check which way the object is being rotated, left to right or right to left
-                if sender.rotation > 0 {
-                    // rotate from the current rotation
-                    newRotation = (sender.rotation * 0.01) + originalRotation
-                    print("rotating right")
-                } else
-                {
-                    // rotate from the current rotation and multiply by -1 to rotate the object in the right direction
-                    newRotation = -1 * ((sender.rotation * 0.01) + originalRotation)
-                    print("rotating left")
-                }
+                sender.rotation = 0
                 
-                print("The object is rotated by \(newRotation)")
-                // based on how far the person rotated on the screen rotate in the y-axis the object immediately
-                let rotateAction = SCNAction.rotateBy(x: 0, y: newRotation, z: 0, duration: 0)
-                
-                // run the rotate action on the node
-                node.runAction(rotateAction)
             } else if sender.state == .ended {
                 // Save the last rotation
                 lastRotation = sender.rotation
