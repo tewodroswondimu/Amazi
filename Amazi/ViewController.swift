@@ -21,6 +21,10 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     @IBOutlet weak var sceneView: ARSCNView!
     @IBOutlet weak var statusLabel: UILabel!
     
+    // Properties
+    // A property to record the last rotated state of an object
+    var lastRotation: CGFloat = 0
+    
     // Configuration
     let configuration = ARWorldTrackingConfiguration()
     
@@ -55,11 +59,73 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         // Allows to detect pinch gestures 
         let pinchGestureRecognizer = UIPinchGestureRecognizer(target: self, action: #selector(pinched))
         
+        // Allows to detect rotate gestures
+        let rotateGestureRecognizer = UIRotationGestureRecognizer(target: self, action: #selector(rotated))
+        
+        // Add all the gesture recognizers to the sceneView
         self.sceneView.addGestureRecognizer(tapGestureRecognizer)
         self.sceneView.addGestureRecognizer(pinchGestureRecognizer)
+        self.sceneView.addGestureRecognizer(rotateGestureRecognizer)
     }
     
-    // method for when a person pinches on the screen
+    // method for when a person rotates an object in the scene
+    @objc func rotated(sender: UIRotationGestureRecognizer) {
+        // get the sceneview that was pinched on
+        let sceneView = sender.view as! ARSCNView
+        
+        // location that was rotated in the scene view
+        let rotateLocation = sender.location(in: sceneView)
+        
+        // check whether the rotation matches the location of an object
+        let hitTest = sceneView.hitTest(rotateLocation)
+        
+        // Check if an object was rotated
+        if(!hitTest.isEmpty) {
+            // get the result from the hit test
+            let results: SCNHitTestResult = hitTest.first!
+            
+            // get the node from the result
+            let node = results.node
+            
+            // Original rotation stores the rotation when the object begins rotating
+            var originalRotation = CGFloat()
+            if sender.state == .began {
+                sender.rotation = lastRotation
+
+                // stores the rotation at the time when the view is about to begin rotating.
+                originalRotation = sender.rotation
+            } else if sender.state == .changed {
+                var newRotation: CGFloat = 0.0
+                
+                // Check which way the object is being rotated, left to right or right to left
+                if sender.rotation > 0 {
+                    // rotate from the current rotation
+                    newRotation = (sender.rotation * 0.01) + originalRotation
+                    print("rotating right")
+                } else
+                {
+                    // rotate from the current rotation and multiply by -1 to rotate the object in the right direction
+                    newRotation = -1 * ((sender.rotation * 0.01) + originalRotation)
+                    print("rotating left")
+                }
+                
+                print("The object is rotated by \(newRotation)")
+                // based on how far the person rotated on the screen rotate in the y-axis the object immediately
+                let rotateAction = SCNAction.rotateBy(x: 0, y: newRotation, z: 0, duration: 0)
+                
+                // run the rotate action on the node
+                node.runAction(rotateAction)
+            } else if sender.state == .ended {
+                // Save the last rotation
+                lastRotation = sender.rotation
+            }
+        }
+        else {
+            print("Object was not rotated")
+        }
+    }
+    
+    // method for when a person pinches an object in the scene
     @objc func pinched(sender: UIPinchGestureRecognizer) {
         // get the sceneview that was pinched on
         let sceneView = sender.view as! ARSCNView
@@ -67,7 +133,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         // location that was pinched in the scene view
         let pinchLocation = sender.location(in: sceneView)
         
-        // check wheter your pinch matches the location of an object
+        // check whether your pinch matches the location of an object
         let hitTest = sceneView.hitTest(pinchLocation)
         
         // Check if an object was pinched

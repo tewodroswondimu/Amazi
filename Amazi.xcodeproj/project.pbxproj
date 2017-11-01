@@ -15,6 +15,7 @@
 		187FFAB61FA895BB001B1B3F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 187FFAB51FA895BB001B1B3F /* Assets.xcassets */; };
 		187FFAB91FA895BB001B1B3F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 187FFAB71FA895BB001B1B3F /* LaunchScreen.storyboard */; };
 		187FFAC11FA898AD001B1B3F /* menuCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 187FFAC01FA898AD001B1B3F /* menuCollectionViewCell.swift */; };
+		18F620561FA9DF6000DAFBDB /* Textures in Resources */ = {isa = PBXBuildFile; fileRef = 1867920E1FA8B13D0012EC7D /* Textures */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -134,6 +135,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				18F620561FA9DF6000DAFBDB /* Textures in Resources */,
 				187FFAB91FA895BB001B1B3F /* LaunchScreen.storyboard in Resources */,
 				186792101FA8B46A0012EC7D /* Model.scnassets in Resources */,
 				187FFAB61FA895BB001B1B3F /* Assets.xcassets in Resources */,
