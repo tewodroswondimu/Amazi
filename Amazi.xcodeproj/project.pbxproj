@@ -16,6 +16,7 @@
 		187FFAB91FA895BB001B1B3F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 187FFAB71FA895BB001B1B3F /* LaunchScreen.storyboard */; };
 		187FFAC11FA898AD001B1B3F /* menuCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 187FFAC01FA898AD001B1B3F /* menuCollectionViewCell.swift */; };
 		18E332AC1FAA668F0043D129 /* Virtual Objects in Resources */ = {isa = PBXBuildFile; fileRef = 18E332AB1FAA66870043D129 /* Virtual Objects */; };
+		18E332B01FAB1D6C0043D129 /* Pump.scn in Resources */ = {isa = PBXBuildFile; fileRef = 18E332AF1FAB1D690043D129 /* Pump.scn */; };
 		18F620561FA9DF6000DAFBDB /* Textures in Resources */ = {isa = PBXBuildFile; fileRef = 1867920E1FA8B13D0012EC7D /* Textures */; };
 /* End PBXBuildFile section */
 
@@ -32,6 +33,7 @@
 		187FFABA1FA895BB001B1B3F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		187FFAC01FA898AD001B1B3F /* menuCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = menuCollectionViewCell.swift; sourceTree = "<group>"; };
 		18E332AB1FAA66870043D129 /* Virtual Objects */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "Virtual Objects"; sourceTree = "<group>"; };
+		18E332AF1FAB1D690043D129 /* Pump.scn */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; name = Pump.scn; path = Model.scnassets/Pump.scn; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -67,6 +69,7 @@
 				1867920F1FA8B2050012EC7D /* Solar.scn */,
 				1867920E1FA8B13D0012EC7D /* Textures */,
 				187FFAAE1FA895BB001B1B3F /* AppDelegate.swift */,
+				18E332AF1FAB1D690043D129 /* Pump.scn */,
 				187FFAB01FA895BB001B1B3F /* ViewController.swift */,
 				187FFAC01FA898AD001B1B3F /* menuCollectionViewCell.swift */,
 				18E332AB1FAA66870043D129 /* Virtual Objects */,
@@ -142,6 +145,7 @@
 				187FFAB91FA895BB001B1B3F /* LaunchScreen.storyboard in Resources */,
 				186792101FA8B46A0012EC7D /* Model.scnassets in Resources */,
 				187FFAB61FA895BB001B1B3F /* Assets.xcassets in Resources */,
+				18E332B01FAB1D6C0043D129 /* Pump.scn in Resources */,
 				18E332AC1FAA668F0043D129 /* Virtual Objects in Resources */,
 				187FFAB41FA895BB001B1B3F /* Main.storyboard in Resources */,
 				186792111FA8B4B80012EC7D /* Solar.scn in Resources */,

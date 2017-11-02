@@ -12,7 +12,7 @@ import ARKit
 class ViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, ARSCNViewDelegate {
     
     // All the menu items
-    let menuArray: [String] = ["Well", "Drip", "Solar", "vase"]
+    let menuArray: [String] = ["Pump", "Solar", "Well"]
     var selectedItem: String?
     var selectedNode = SCNNode()
     
@@ -249,7 +249,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
             let moveNodeTo = SCNVector3(atPosition.x, atPosition.y - 0.235, atPosition.z)
             animateNode(node: nodeToAdd, toValue: moveNodeTo)
         
-            //nodeToAdd.removeFromParentNode()
+            nodeToAdd.removeFromParentNode()
             self.terrain.addChildNode(nodeToAdd)
     }
     
@@ -335,6 +335,10 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         
     }
     
+    func removeItem() {
+        self.selectedNode.removeFromParentNode()
+    }
+    
     // When ever a button is pressed you change the background to the color green
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let cell = collectionView.cellForItem(at: indexPath)
@@ -350,6 +354,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         
         // Change the background color of the cell
         cell?.backgroundColor = UIColor.orange;
+        removeItem()
     }
     
     // Set the number of items in the menu collection view
