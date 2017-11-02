@@ -14,6 +14,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     // All the menu items
     let menuArray: [String] = ["Well", "Drip", "Solar", "vase"]
     var selectedItem: String?
+    var selectedNode = SCNNode()
     
     // Outlets for the different elements
     @IBOutlet weak var menuCollectionView: UICollectionView!
@@ -22,6 +23,9 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     @IBOutlet weak var statusLabel: UILabel!
     
     // Properties
+    var firstItem = true
+    var terrain = SCNNode()
+    
     // A property to record the last rotated state of an object
     var lastRotation: CGFloat = 0
     
@@ -34,11 +38,15 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         // Setup the data source and delegate of the collection view
         self.menuCollectionView.dataSource = self
         self.menuCollectionView.delegate = self
+        self.menuCollectionView.isHidden = true
         
         self.sceneView.delegate = self
         
         // show feature points and the world origin when the application loads up
         sceneView.debugOptions = [ARSCNDebugOptions.showWorldOrigin, ARSCNDebugOptions.showFeaturePoints];
+        
+        // Lets scene kit automatically add lighting (omnidirectional)
+        self.sceneView.autoenablesDefaultLighting = true
         
         // enable horizontal plane detection
         configuration.planeDetection = .horizontal;
@@ -50,8 +58,36 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         self.registerGestureRecognizer()
     }
     
+    // Create a terrain object
+    func createTerrainObject() -> SCNNode {
+        let terrainHeight: CGFloat = 0.8
+        let terrainWidth: CGFloat = 0.8
+        let terrainLength: CGFloat = 0.05
+        let terrainPostion = (terrainLength / 2) + 0.001
+        
+        let terrainNode = SCNNode(geometry: SCNPlane(width: terrainWidth, height: terrainHeight))
+        terrainNode.geometry?.firstMaterial?.diffuse.contents = #imageLiteral(resourceName: "Terrain")
+        terrainNode.geometry?.firstMaterial?.isDoubleSided = true
+        terrainNode.eulerAngles = SCNVector3(Float(90.degreesToRadians), 0,0)
+        terrainNode.position = SCNVector3(0, terrainPostion, 0)
+        
+        let terrainParentNode = SCNNode(geometry: SCNBox(width: terrainWidth, height: terrainLength, length: terrainHeight, chamferRadius: 0))
+        terrainParentNode.geometry?.firstMaterial?.diffuse.contents = #imageLiteral(resourceName: "Soil")
+        terrainParentNode.addChildNode(terrainNode)
+        
+        // An object that has the dirt and surface
+        let allTerrain = terrainParentNode.flattenedClone()
+        
+        return allTerrain
+    }
+    
+    @IBAction func addButtonTapped(_ sender: Any) {
+        addItem(inTerrain: terrain, nodeToAdd: self.selectedNode)
+    }
     
     func registerGestureRecognizer() {
+        // Allows to detect pan gestures
+        // let panGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(panned))
         
         // Allows to detect tap gestures
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(tapped))
@@ -63,9 +99,35 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         let rotateGestureRecognizer = UIRotationGestureRecognizer(target: self, action: #selector(rotated))
         
         // Add all the gesture recognizers to the sceneView
+        //self.sceneView.addGestureRecognizer(panGestureRecognizer)
         self.sceneView.addGestureRecognizer(tapGestureRecognizer)
         self.sceneView.addGestureRecognizer(pinchGestureRecognizer)
         self.sceneView.addGestureRecognizer(rotateGestureRecognizer)
+    }
+    
+    // method for when a person pan an object in the scene
+    @objc func panned(sender: UITapGestureRecognizer) {
+        // get the sceneview that was pinched on
+        let sceneView = sender.view as! ARSCNView
+        
+        // location that was panned in the scene view
+        let panLocation = sender.location(in: sceneView)
+        
+        // check whether the pan matches the location of an object
+        let hitTest = sceneView.hitTest(panLocation)
+        
+        // Check if an object was rotated
+        if(!hitTest.isEmpty) {
+            // get the result from the hit test
+            //let results: SCNHitTestResult = hitTest.first!
+            
+            // get the node from the result
+            // let node = results.node
+            
+        }
+        else {
+            print("Object was not panned")
+        }
     }
     
     // method for when a person rotates an object in the scene
@@ -144,32 +206,133 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         
         let hitTest = sceneView.hitTest(tapLocation, types: .existingPlaneUsingExtent)
         if (!hitTest.isEmpty) {
-            print("touched a horizontal surface")
-            addItem(hitTestResult: hitTest.first!)
+            let hitTestResult = hitTest.first!
+            
+            if (firstItem) {
+                terrain = addTerrain(hitTestResult: hitTestResult)
+            } else {
+            }
         }
         else {
             print("No match")
         }
     }
     
+    func addTerrain(hitTestResult: ARHitTestResult) -> SCNNode {
+        let terrain = createTerrainObject()
+        
+        // encodes information
+        let transform = hitTestResult.worldTransform
+        
+        // position of the horizontal surface
+        let thirdColumn = transform.columns.3
+        terrain.position = SCNVector3(thirdColumn.x, thirdColumn.y, thirdColumn.z)
+        
+        self.sceneView.scene.rootNode.addChildNode(terrain)
+        
+        firstItem = false
+        self.menuCollectionView.isHidden = false
+        
+        return terrain
+    }
+    
     // Add the terrain to a plane when the application starts
-    func addItem(hitTestResult: ARHitTestResult) {
+    func addItem(inTerrain: SCNNode, nodeToAdd: SCNNode) {
+            // encodes information
+            // let transform = hitTestResult.worldTransform
+            
+            // position of the horizontal surface
+            // let thirdColumn = transform.columns.3
+            let atPosition = inTerrain.position
+            nodeToAdd.removeAction(forKey: "rotateSelectedNode")
+        
+            let moveNodeTo = SCNVector3(atPosition.x, atPosition.y - 0.235, atPosition.z)
+            animateNode(node: nodeToAdd, toValue: moveNodeTo)
+        
+            //nodeToAdd.removeFromParentNode()
+            self.terrain.addChildNode(nodeToAdd)
+    }
+    
+    
+    func animateNode(node: SCNNode, toValue: SCNVector3) {
+        // to make the object make a shaky spin we modify the position
+        let move = CABasicAnimation(keyPath: "position")
+        
+        // presentation is the current state of the object in the sceneview
+        // this records the starting point of the animation
+        move.fromValue = node.presentation.position
+        
+        // to change the duration of the animation
+        move.duration = 1
+        
+        // this shows where you want the node to go relative to the world origin
+        // spin.toValue = SCNVector3(0,0,-2)
+        
+        // if you want to go from the current position of the node,
+        move.toValue = toValue
+        
+        // add the animation to the node
+        node.addAnimation(move, forKey: "position")
+    }
+    
+    // Add the terrain to a plane when the application starts
+    func moveItem(hitTestResult: ARHitTestResult, theNode: SCNNode) {
+//        // find out the item is currently selected
+//        if let selectedItem = self.selectedItem {
+//            // encodes information
+//            let transform = hitTestResult.worldTransform
+//
+//            // position of the horizontal surface
+//            let thirdColumn = transform.columns.3
+//
+//            theNode.position = SCNVector3(thirdColumn.x, thirdColumn.y, thirdColumn.z)
+//        }
+    }
+    
+    func showItem() {
         // find out the item is currently selected
         if let selectedItem = self.selectedItem {
             let scene = SCNScene(named: "Model.scnassets/\(selectedItem).scn")
             
             let node = (scene?.rootNode.childNode(withName: selectedItem, recursively: false))!
             
-            // encodes information
-            let transform = hitTestResult.worldTransform
+            // the current location and orientation of the camera view
+            guard let pointOfView = sceneView.pointOfView else {return}
             
-            // position of the horizontal surface
-            let thirdColumn = transform.columns.3
+            // the location and orientation are encoded in a transform matrix
+            let transform = pointOfView.transform
             
-            node.position = SCNVector3(thirdColumn.x, thirdColumn.y, thirdColumn.z)
+            // Orientation is where your phone is facing
+            // extract the orientation from the tranform matrix
+            // the third column in the transform matrix is the orientation
+            // x is located in row 1
+            // y is located in row 2
+            // z is located in row 3
+            // When trying to see the value for orientation, you'll find looking up give you a -ve value, switch that by multiplying the transform matrix by -ve
+            let orientation = SCNVector3(-transform.m31,-transform.m32,-transform.m33)
             
-            self.sceneView.scene.rootNode.addChildNode(node)
+            // Location is where your phone is located relative to the sceneView and how it's moving transitionally
+            // location is also a 3d field
+            // the fourth column in the tranform matrix is the location
+            // x is located in row 1
+            // y is located in row 2
+            // z is located in row 3
+            let location = SCNVector3(transform.m41, transform.m42, transform.m43)
+            
+            // to get the current position we combine the orientation and location
+            let currentPositionOfCamera = orientation + location
+            
+            node.position = currentPositionOfCamera
+            
+            // rotate the node around itself
+            let nodeRotateAction = SCNAction.rotateBy(x: 0, y: CGFloat(360.degreesToRadians), z: 0, duration: 8)
+            let rotateForever = SCNAction.repeatForever(nodeRotateAction)
+            node.runAction(rotateForever, forKey: "rotateSelectedNode")
+            self.selectedNode = node
+            
+            self.sceneView.scene.rootNode.addChildNode(self.selectedNode)
         }
+        
     }
     
     // When ever a button is pressed you change the background to the color green
@@ -178,6 +341,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         cell?.backgroundColor = UIColor.green
         
         self.selectedItem = menuArray[indexPath.row]
+        showItem();
     }
     
     // Change the color of the button when it is pressed
@@ -224,5 +388,16 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         // Dispose of any resources that can be recreated.
     }
 
+}
+
+
+extension Int {
+    var degreesToRadians: Double { return Double(self) * .pi/180 }
+}
+
+
+// Modifies the binary operator + to add two SCNVector3s and create one SCNVector3
+func +(left: SCNVector3, right: SCNVector3) -> SCNVector3 {
+    return SCNVector3Make(left.x + right.x, left.y + right.y, left.z + right.z)
 }
 
