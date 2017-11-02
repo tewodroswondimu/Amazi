@@ -12,11 +12,12 @@ import ARKit
 class ViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, ARSCNViewDelegate {
     
     // All the menu items
-    let menuArray: [String] = ["Pump", "Solar", "Well"]
+    let menuArray: [String] = ["Pump", "Solar"]
     var selectedItem: String?
     var selectedNode = SCNNode()
     
     // Outlets for the different elements
+    @IBOutlet weak var addButton: UIButton!
     @IBOutlet weak var menuCollectionView: UICollectionView!
     @IBOutlet weak var statusViewBar: UIView!
     @IBOutlet weak var sceneView: ARSCNView!
@@ -39,6 +40,8 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         self.menuCollectionView.dataSource = self
         self.menuCollectionView.delegate = self
         self.menuCollectionView.isHidden = true
+        
+        self.addButton.isHidden = true
         
         self.sceneView.delegate = self
         
@@ -189,6 +192,10 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
             // run the pinch action on the node
             node.runAction(pinchAction)
             
+            if node.name == "selectedNode" {
+                self.selectedNode = node
+            }
+            
             // Make the scale size constant, so that it doesn't keep gettting bigger
             sender.scale = 1.0
             
@@ -238,23 +245,33 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     
     // Add the terrain to a plane when the application starts
     func addItem(inTerrain: SCNNode, nodeToAdd: SCNNode) {
-            // encodes information
-            // let transform = hitTestResult.worldTransform
-            
-            // position of the horizontal surface
-            // let thirdColumn = transform.columns.3
-            let atPosition = inTerrain.position
-            nodeToAdd.removeAction(forKey: "rotateSelectedNode")
         
-            let moveNodeTo = SCNVector3(atPosition.x, atPosition.y - 0.235, atPosition.z)
-            animateNode(node: nodeToAdd, toValue: moveNodeTo)
+        // let atPosition = inTerrain.position
+        nodeToAdd.removeAction(forKey: "rotateSelectedNode")
+        nodeToAdd.name = "addedNode"
+        self.selectedNode = nodeToAdd
+    
+        let x = randomNumbers(firstNum: -0.3, secondNum: 0.3)
+        let z = randomNumbers(firstNum: -0.3, secondNum: 0.3)
         
-            nodeToAdd.removeFromParentNode()
-            self.terrain.addChildNode(nodeToAdd)
+        self.terrain.addChildNode(nodeToAdd)
+        
+        let moveFrom = nodeToAdd.presentation.position
+        let moveNodeTo = SCNVector3(x,0.051,z)
+        
+        animateNode(node: nodeToAdd, fromValue: moveFrom, toValue: moveNodeTo)
+        nodeToAdd.position = moveNodeTo
+    
+        if (nodeToAdd.animationKeys.isEmpty) {
+        }
     }
     
+    // generates a random number given a minimum and maximum value
+    func randomNumbers(firstNum: CGFloat, secondNum: CGFloat) -> CGFloat {
+        return CGFloat(arc4random()) / CGFloat(UINT32_MAX) * abs(firstNum - secondNum) + min(firstNum, secondNum)
+    }
     
-    func animateNode(node: SCNNode, toValue: SCNVector3) {
+    func animateNode(node: SCNNode, fromValue: SCNVector3, toValue: SCNVector3) {
         // to make the object make a shaky spin we modify the position
         let move = CABasicAnimation(keyPath: "position")
         
@@ -275,20 +292,6 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         node.addAnimation(move, forKey: "position")
     }
     
-    // Add the terrain to a plane when the application starts
-    func moveItem(hitTestResult: ARHitTestResult, theNode: SCNNode) {
-//        // find out the item is currently selected
-//        if let selectedItem = self.selectedItem {
-//            // encodes information
-//            let transform = hitTestResult.worldTransform
-//
-//            // position of the horizontal surface
-//            let thirdColumn = transform.columns.3
-//
-//            theNode.position = SCNVector3(thirdColumn.x, thirdColumn.y, thirdColumn.z)
-//        }
-    }
-    
     func showItem() {
         // find out the item is currently selected
         if let selectedItem = self.selectedItem {
@@ -298,6 +301,8 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
             
             // the current location and orientation of the camera view
             guard let pointOfView = sceneView.pointOfView else {return}
+            
+            self.addButton.isHidden = false
             
             // the location and orientation are encoded in a transform matrix
             let transform = pointOfView.transform
@@ -323,6 +328,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
             let currentPositionOfCamera = orientation + location
             
             node.position = currentPositionOfCamera
+            node.name = "selectedNode"
             
             // rotate the node around itself
             let nodeRotateAction = SCNAction.rotateBy(x: 0, y: CGFloat(360.degreesToRadians), z: 0, duration: 8)
@@ -336,7 +342,10 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     }
     
     func removeItem() {
-        self.selectedNode.removeFromParentNode()
+        if (self.selectedNode.name == "selectedNode") {
+            self.selectedNode.removeFromParentNode()
+        }
+        self.addButton.isHidden = true
     }
     
     // When ever a button is pressed you change the background to the color green

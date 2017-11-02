@@ -115,6 +115,7 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
+                        <outlet property="addButton" destination="tEk-9E-Ns8" id="d1K-px-Vje"/>
                         <outlet property="menuCollectionView" destination="Xxm-5e-ktv" id="WGZ-1X-QzD"/>
                         <outlet property="sceneView" destination="Myy-D2-CTH" id="xqS-vc-S9B"/>
                         <outlet property="statusLabel" destination="TOO-2M-UJW" id="7UZ-uK-bnA"/>
