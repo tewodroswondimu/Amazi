@@ -21,6 +21,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		180344221FBD894100D282EA /* model.scn */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; name = model.scn; path = Model.scnassets/model.scn; sourceTree = "<group>"; };
 		186792061FA8A9EB0012EC7D /* Model.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = Model.scnassets; sourceTree = "<group>"; };
 		1867920E1FA8B13D0012EC7D /* Textures */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Textures; sourceTree = "<group>"; };
 		1867920F1FA8B2050012EC7D /* Solar.scn */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; name = Solar.scn; path = Model.scnassets/Solar.scn; sourceTree = "<group>"; };
@@ -66,6 +67,7 @@
 		187FFAAD1FA895BB001B1B3F /* Amazi */ = {
 			isa = PBXGroup;
 			children = (
+				180344221FBD894100D282EA /* model.scn */,
 				1867920F1FA8B2050012EC7D /* Solar.scn */,
 				1867920E1FA8B13D0012EC7D /* Textures */,
 				187FFAAE1FA895BB001B1B3F /* AppDelegate.swift */,
