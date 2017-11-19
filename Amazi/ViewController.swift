@@ -24,6 +24,11 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     @IBOutlet weak var sceneView: ARSCNView!
     @IBOutlet weak var statusLabel: UILabel!
     
+    /// The view controller that displays the status and "restart experience" UI.
+    lazy var statusViewController: StatusViewController = {
+        return childViewControllers.lazy.flatMap({ $0 as? StatusViewController }).first!
+    }()
+    
     // Properties
     var firstItem = true
     var terrain = SCNNode()
@@ -433,6 +438,8 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         DispatchQueue.main.async {
             self.statusLabel.isHidden = false
             self.statusLabel.text = "Plane detected"
+            
+            self.statusViewController.scheduleMessage("TRY MOVING LEFT OR RIGHT", inSeconds: 5.0, messageType: .focusSquare)
             DispatchQueue.main.asyncAfter(deadline: .now()+3) {
                 self.statusLabel.isHidden = true
             }

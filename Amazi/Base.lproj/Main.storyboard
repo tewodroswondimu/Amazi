@@ -58,9 +58,6 @@
                                             <constraint firstItem="UzL-Jb-zV5" firstAttribute="centerX" secondItem="fde-S2-FP4" secondAttribute="centerX" id="N1z-zL-9cD"/>
                                             <constraint firstItem="UzL-Jb-zV5" firstAttribute="centerY" secondItem="fde-S2-FP4" secondAttribute="centerY" id="ODX-df-YZq"/>
                                         </constraints>
-                                        <connections>
-                                            <outlet property="collectionViewLabel" destination="UzL-Jb-zV5" id="4gF-jT-gcv"/>
-                                        </connections>
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
@@ -116,7 +113,6 @@
                     </view>
                     <connections>
                         <outlet property="addButton" destination="tEk-9E-Ns8" id="d1K-px-Vje"/>
-                        <outlet property="menuCollectionView" destination="Xxm-5e-ktv" id="WGZ-1X-QzD"/>
                         <outlet property="sceneView" destination="Myy-D2-CTH" id="xqS-vc-S9B"/>
                         <outlet property="statusLabel" destination="TOO-2M-UJW" id="7UZ-uK-bnA"/>
                         <outlet property="statusViewBar" destination="33R-ib-bpj" id="ol7-kp-CGO"/>
@@ -124,7 +120,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-79.200000000000003" y="130.88455772113943"/>
+            <point key="canvasLocation" x="-607" y="212"/>
         </scene>
     </scenes>
 </document>
