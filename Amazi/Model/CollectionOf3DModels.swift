@@ -17,11 +17,11 @@ class CollectionOf3DModels {
     private var all3DObjects = [ThreeDimensionalModel]() // all the 3D Model Objects
     
     // initializer for the class
-    init(collectionName: String, collectionNode: SCNNode) {
+    init(collectionName: String) {
         name = collectionName
-        node = collectionNode
+        node = SCNNode()
         all3DObjects = [ThreeDimensionalModel]()
-        numberOf3DObjects = all3DObjects.count
+        numberOf3DObjects = 0
     }
     
     // get the name of the collection
@@ -57,6 +57,11 @@ class CollectionOf3DModels {
     // get the node of the collection
     func getAll3DObjects() -> [ThreeDimensionalModel] {
         return all3DObjects
+    }
+    
+    // get all the 3d objects of the collection
+    func setAll3DObjects(objects: [ThreeDimensionalModel]) {
+        all3DObjects = objects
     }
     
     // add a 3D Object to the collection
@@ -102,30 +107,46 @@ class CollectionOf3DModels {
     func build3DModelsFromPlist () -> [ThreeDimensionalModel]  {
         // Find the plist with the collection name
         let path = Bundle.main.path(forResource: name, ofType: "plist")!
-        let url = URL(fileURLWithPath: path)
-        let data = try! Data(contentsOf: url)
-        let plist = try! PropertyListSerialization.propertyList(from: data, options: .mutableContainers, format: nil)
-        let collectionArray = plist as! [[String:String]]
+        //let url = URL(fileURLWithPath: path)
         var allTheModelsFromPlist = [ThreeDimensionalModel]()
+        
+        //let plistResults = NSArray(contentsOfURL: url) as? [String: String]
+        let collectionArray = NSArray(contentsOfFile: path) as! [[String: AnyObject]]
         
         // loop through elements of the array
         for (_, element) in collectionArray.enumerated() {
+            // Cast the element into a dictionary
+            let modelDetails = element as Dictionary<String, Any>
+            
+            let modelDescription = modelDetails["description"] as! Dictionary<String, String>
+            let modelLocation = modelDetails["location"] as! Dictionary<String, String>
+            let modelOrientation = modelDetails["orientation"] as! Dictionary <String, String>
+            
             // create a 3D model object
-            let modelName: String = element["name"]!
-            //let temp: element["description"]
-            let modelDescription = ["new": "hello"]
-            //let theLocation = element["location"]
-            let x = 3.0
-            let y = 2.0
-            let z = 0.0
-            let modelLocation = SCNVector3(x, y, z)
-            //let theOrientation = element["orientation"]
-            let modelOrientation = SCNVector3(x, y, z)
-            let model = ThreeDimensionalModel(name: modelName, description: modelDescription, location: modelLocation, orientation: modelOrientation)
+            let modelName = modelDescription["name"]
+            let modelPrice = modelDescription["price"]
+            let modelDimensions = modelDescription["dimensions"]
+            
+            let modelLocations = SCNVector3(Float(modelLocation["x"]!)!, Float(modelLocation["y"]!)!, Float(modelLocation["z"]!)!);
+            
+            let modelOrientations = SCNVector3(Float(modelOrientation["x"]!)!, Float(modelOrientation["y"]!)!, Float(modelOrientation["z"]!)!);
+
+            let model = ThreeDimensionalModel(name: modelName!, price: modelPrice!, dimensions: modelDimensions!, location: modelLocations, orientation: modelOrientations, node: SCNNode())
+            model.setNode(newNode: model.buildNodeForModel())
             
             // append the new mdoel to all the objects in the collection
             allTheModelsFromPlist.append(model)
         }
         return allTheModelsFromPlist
+    }
+    
+    // Build node with all 3d objects
+    func buildNodeWith3DObjects () -> SCNNode {
+        let newNodeForCollection = SCNNode()
+        for model in all3DObjects {
+            let nodeForModel = model.buildNodeForModel()
+            newNodeForCollection.addChildNode(nodeForModel)
+        }
+        return newNodeForCollection
     }
 }

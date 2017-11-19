@@ -14,13 +14,15 @@ class ThreeDimensionalModel {
     private var description: [String: String] // describes the 3D Model
     private var location: SCNVector3 // location of the 3D model
     private var orientation: SCNVector3 // orientation of the 3D model
+    private var node: SCNNode // node for the 3D model
     
     // initalizer for the class
-    init (name: String, description: [String: String], location: SCNVector3, orientation: SCNVector3) {
+    init (name: String, price: String, dimensions: String, location: SCNVector3, orientation: SCNVector3, node: SCNNode) {
         self.name = name
-        self.description = description
+        self.description = ["name": name, "price": price, "dimensions": dimensions]
         self.location = location
         self.orientation = orientation
+        self.node = node
     }
     
     // get the name of the 3D Model
@@ -43,6 +45,16 @@ class ThreeDimensionalModel {
         description = newDescription
     }
     
+    // get the node of the model
+    func getNode() -> SCNNode {
+        return node
+    }
+    
+    // set the node of the model
+    func setNode(newNode: SCNNode) {
+        node = newNode
+    }
+    
     // get the location of the 3D Model
     func getLocation() -> SCNVector3 {
         return location
@@ -61,5 +73,14 @@ class ThreeDimensionalModel {
     // set the orientation of the 3D Model
     func setOrientation(newOrientation: SCNVector3) {
         orientation = newOrientation
+    }
+    
+    // build a node for the model data you have
+    func buildNodeForModel () -> SCNNode {
+        let fileName = name + ".scn"
+        let modelScene = SCNScene(named: "Model.scnassets/" + fileName)
+        let modelNode = modelScene?.rootNode.childNode(withName: name, recursively: false)
+        modelNode?.position = location
+        return modelNode!
     }
 }

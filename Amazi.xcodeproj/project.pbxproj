@@ -15,7 +15,7 @@
 		187FFAB61FA895BB001B1B3F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 187FFAB51FA895BB001B1B3F /* Assets.xcassets */; };
 		187FFAB91FA895BB001B1B3F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 187FFAB71FA895BB001B1B3F /* LaunchScreen.storyboard */; };
 		187FFAC11FA898AD001B1B3F /* menuCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 187FFAC01FA898AD001B1B3F /* menuCollectionViewCell.swift */; };
-		1895C30E1FC186ED0061FC6A /* pipes.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1895C30D1FC186EC0061FC6A /* pipes.plist */; };
+		1895C30E1FC186ED0061FC6A /* pumps.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1895C30D1FC186EC0061FC6A /* pumps.plist */; };
 		1895C3111FC187400061FC6A /* CollectionOf3DModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1895C3101FC187400061FC6A /* CollectionOf3DModels.swift */; };
 		1895C3131FC1874F0061FC6A /* ThreeDimensionalModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1895C3121FC1874F0061FC6A /* ThreeDimensionalModel.swift */; };
 		18E332B01FAB1D6C0043D129 /* Pump.scn in Resources */ = {isa = PBXBuildFile; fileRef = 18E332AF1FAB1D690043D129 /* Pump.scn */; };
@@ -38,7 +38,7 @@
 		187FFAB81FA895BB001B1B3F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		187FFABA1FA895BB001B1B3F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		187FFAC01FA898AD001B1B3F /* menuCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = menuCollectionViewCell.swift; sourceTree = "<group>"; };
-		1895C30D1FC186EC0061FC6A /* pipes.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = pipes.plist; sourceTree = "<group>"; };
+		1895C30D1FC186EC0061FC6A /* pumps.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = pumps.plist; sourceTree = "<group>"; };
 		1895C3101FC187400061FC6A /* CollectionOf3DModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionOf3DModels.swift; sourceTree = "<group>"; };
 		1895C3121FC1874F0061FC6A /* ThreeDimensionalModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreeDimensionalModel.swift; sourceTree = "<group>"; };
 		18E332AF1FAB1D690043D129 /* Pump.scn */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; name = Pump.scn; path = Model.scnassets/Pump.scn; sourceTree = "<group>"; };
@@ -98,7 +98,7 @@
 		1895C30C1FC186BD0061FC6A /* ObjectsData */ = {
 			isa = PBXGroup;
 			children = (
-				1895C30D1FC186EC0061FC6A /* pipes.plist */,
+				1895C30D1FC186EC0061FC6A /* pumps.plist */,
 			);
 			path = ObjectsData;
 			sourceTree = "<group>";
@@ -177,7 +177,7 @@
 				187FFAB61FA895BB001B1B3F /* Assets.xcassets in Resources */,
 				18E332B01FAB1D6C0043D129 /* Pump.scn in Resources */,
 				187FFAB41FA895BB001B1B3F /* Main.storyboard in Resources */,
-				1895C30E1FC186ED0061FC6A /* pipes.plist in Resources */,
+				1895C30E1FC186ED0061FC6A /* pumps.plist in Resources */,
 				186792111FA8B4B80012EC7D /* Solar.scn in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

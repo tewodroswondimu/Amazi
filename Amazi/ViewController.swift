@@ -12,9 +12,10 @@ import ARKit
 class ViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, ARSCNViewDelegate {
     
     // All the menu items
-    let menuArray: [String] = ["Pump", "Water Pump", "Solar", "Crop", "Well"]
+    let menuArray: [String] = ["Pump", "Water Pump", "Solar", "Crop", "Well", "Pipe"]
     var selectedItem: String?
     var selectedNode = SCNNode()
+    var collectionNode = SCNNode()
     
     // Outlets for the different elements
     @IBOutlet weak var addButton: UIButton!
@@ -60,6 +61,20 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         
         // Set up to recognize gesture
         self.registerGestureRecognizer()
+        
+        self.addCollectionOfModels()
+    }
+    
+    func addCollectionOfModels() {
+        let collectionOfModels = CollectionOf3DModels(collectionName: "pumps")
+        let models = collectionOfModels.build3DModelsFromPlist()
+        collectionOfModels.setAll3DObjects(objects: models)
+        collectionNode = collectionOfModels.buildNodeWith3DObjects()
+        collectionOfModels.setNode(newNode: collectionNode)
+        
+        // place the object infront of you and then add it to the sceneView
+        //collectionNode.position = SCNVector3(0,0,-1)
+        //self.sceneView.scene.rootNode.addChildNode(collectionNode)
     }
     
     // Create a terrain object
@@ -323,8 +338,9 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         if let selectedItem = self.selectedItem {
             let scene = SCNScene(named: "Model.scnassets/\(selectedItem).scn")
             
-            let node = (scene?.rootNode.childNode(withName: selectedItem, recursively: false))!
+            var node = (scene?.rootNode.childNode(withName: selectedItem, recursively: false))!
             
+            node = collectionNode
             // the current location and orientation of the camera view
             guard let pointOfView = sceneView.pointOfView else {return}
             
@@ -427,9 +443,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
 }
-
 
 extension Int {
     var degreesToRadians: Double { return Double(self) * .pi/180 }
