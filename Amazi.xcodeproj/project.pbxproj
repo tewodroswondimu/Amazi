@@ -15,13 +15,14 @@
 		187FFAB61FA895BB001B1B3F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 187FFAB51FA895BB001B1B3F /* Assets.xcassets */; };
 		187FFAB91FA895BB001B1B3F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 187FFAB71FA895BB001B1B3F /* LaunchScreen.storyboard */; };
 		187FFAC11FA898AD001B1B3F /* menuCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 187FFAC01FA898AD001B1B3F /* menuCollectionViewCell.swift */; };
-		18E332AC1FAA668F0043D129 /* Virtual Objects in Resources */ = {isa = PBXBuildFile; fileRef = 18E332AB1FAA66870043D129 /* Virtual Objects */; };
 		18E332B01FAB1D6C0043D129 /* Pump.scn in Resources */ = {isa = PBXBuildFile; fileRef = 18E332AF1FAB1D690043D129 /* Pump.scn */; };
 		18F620561FA9DF6000DAFBDB /* Textures in Resources */ = {isa = PBXBuildFile; fileRef = 1867920E1FA8B13D0012EC7D /* Textures */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		180344221FBD894100D282EA /* model.scn */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; name = model.scn; path = Model.scnassets/model.scn; sourceTree = "<group>"; };
+		180344221FBD894100D282EA /* Crop.scn */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; name = Crop.scn; path = Model.scnassets/Crop.scn; sourceTree = "<group>"; };
+		180344241FBD93D000D282EA /* Well.scn */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; name = Well.scn; path = Model.scnassets/Well.scn; sourceTree = "<group>"; };
+		180344281FBD960A00D282EA /* Water Pump.scn */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; name = "Water Pump.scn"; path = "Model.scnassets/Water Pump.scn"; sourceTree = "<group>"; };
 		186792061FA8A9EB0012EC7D /* Model.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = Model.scnassets; sourceTree = "<group>"; };
 		1867920E1FA8B13D0012EC7D /* Textures */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Textures; sourceTree = "<group>"; };
 		1867920F1FA8B2050012EC7D /* Solar.scn */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; name = Solar.scn; path = Model.scnassets/Solar.scn; sourceTree = "<group>"; };
@@ -33,7 +34,6 @@
 		187FFAB81FA895BB001B1B3F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		187FFABA1FA895BB001B1B3F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		187FFAC01FA898AD001B1B3F /* menuCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = menuCollectionViewCell.swift; sourceTree = "<group>"; };
-		18E332AB1FAA66870043D129 /* Virtual Objects */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "Virtual Objects"; sourceTree = "<group>"; };
 		18E332AF1FAB1D690043D129 /* Pump.scn */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; name = Pump.scn; path = Model.scnassets/Pump.scn; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -67,14 +67,15 @@
 		187FFAAD1FA895BB001B1B3F /* Amazi */ = {
 			isa = PBXGroup;
 			children = (
-				180344221FBD894100D282EA /* model.scn */,
+				180344221FBD894100D282EA /* Crop.scn */,
+				18E332AF1FAB1D690043D129 /* Pump.scn */,
+				180344281FBD960A00D282EA /* Water Pump.scn */,
 				1867920F1FA8B2050012EC7D /* Solar.scn */,
+				180344241FBD93D000D282EA /* Well.scn */,
 				1867920E1FA8B13D0012EC7D /* Textures */,
 				187FFAAE1FA895BB001B1B3F /* AppDelegate.swift */,
-				18E332AF1FAB1D690043D129 /* Pump.scn */,
 				187FFAB01FA895BB001B1B3F /* ViewController.swift */,
 				187FFAC01FA898AD001B1B3F /* menuCollectionViewCell.swift */,
-				18E332AB1FAA66870043D129 /* Virtual Objects */,
 				186792061FA8A9EB0012EC7D /* Model.scnassets */,
 				187FFAB21FA895BB001B1B3F /* Main.storyboard */,
 				187FFAB51FA895BB001B1B3F /* Assets.xcassets */,
@@ -148,7 +149,6 @@
 				186792101FA8B46A0012EC7D /* Model.scnassets in Resources */,
 				187FFAB61FA895BB001B1B3F /* Assets.xcassets in Resources */,
 				18E332B01FAB1D6C0043D129 /* Pump.scn in Resources */,
-				18E332AC1FAA668F0043D129 /* Virtual Objects in Resources */,
 				187FFAB41FA895BB001B1B3F /* Main.storyboard in Resources */,
 				186792111FA8B4B80012EC7D /* Solar.scn in Resources */,
 			);

@@ -12,7 +12,7 @@ import ARKit
 class ViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, ARSCNViewDelegate {
     
     // All the menu items
-    let menuArray: [String] = ["Pump", "Solar"]
+    let menuArray: [String] = ["Pump", "Water Pump", "Solar", "Crop", "Well"]
     var selectedItem: String?
     var selectedNode = SCNNode()
     
@@ -26,6 +26,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     // Properties
     var firstItem = true
     var terrain = SCNNode()
+    var objectsNode = SCNNode()
     
     // A property to record the last rotated state of an object
     var lastRotation: CGFloat = 0
@@ -153,7 +154,14 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
             let node = results.node
             
             if sender.state == .changed {
-                node.eulerAngles.y -= Float(sender.rotation)
+                
+                // Rotate only the terrain
+                if node.name == "Terrain" || node.name == "Objects Node" || node.parent!.name == "Objects Node" {
+                    // run the rotate action on objects node
+                    let theRotation = Float(sender.rotation)
+                    terrain.eulerAngles.y -= theRotation
+                    objectsNode.eulerAngles.y -= theRotation
+                }
                 
                 sender.rotation = 0
                 
@@ -186,11 +194,16 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
             // get the node from the result
             let node = results.node
             
+            
             // based on how far the person pinched on the screen scale the object immediately
             let pinchAction = SCNAction.scale(by: sender.scale, duration: 0)
             
-            // run the pinch action on the node
-            node.runAction(pinchAction)
+            // Scale only the terrain
+            if node.name == "Terrain" || node.name == "Objects Node" || node.parent!.name == "Objects Node" {
+                // run the pinch action on the node
+                terrain.runAction(pinchAction)
+                objectsNode.runAction(pinchAction)
+            }
             
             if node.name == "selectedNode" {
                 self.selectedNode = node
@@ -217,6 +230,16 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
             
             if (firstItem) {
                 terrain = addTerrain(hitTestResult: hitTestResult)
+                
+            
+                // once the terrain has been created, create a node on top of it
+                objectsNode.position = SCNVector3(terrain.position.x, terrain.position.y + 0.05, terrain.position.z)
+                objectsNode.orientation = terrain.orientation
+                let object = createTerrainObject()
+                objectsNode.addChildNode(object)
+                objectsNode.name = "Objects Node"
+                self.sceneView.scene.rootNode.addChildNode(objectsNode)
+ 
             } else {
             }
         }
@@ -227,6 +250,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     
     func addTerrain(hitTestResult: ARHitTestResult) -> SCNNode {
         let terrain = createTerrainObject()
+        terrain.name = "Terrain"
         
         // encodes information
         let transform = hitTestResult.worldTransform
@@ -250,6 +274,8 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         nodeToAdd.removeAction(forKey: "rotateSelectedNode")
         nodeToAdd.name = "addedNode"
         self.selectedNode = nodeToAdd
+        
+        
     
         let x = randomNumbers(firstNum: -0.3, secondNum: 0.3)
         let z = randomNumbers(firstNum: -0.3, secondNum: 0.3)
