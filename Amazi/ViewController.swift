@@ -66,7 +66,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     }
     
     func addCollectionOfModels() {
-        let collectionOfModels = CollectionOf3DModels(collectionName: "pumps")
+        let collectionOfModels = CollectionOf3DModels(collectionName: "crops")
         let models = collectionOfModels.build3DModelsFromPlist()
         collectionOfModels.setAll3DObjects(objects: models)
         collectionNode = collectionOfModels.buildNodeWith3DObjects()
@@ -101,7 +101,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     }
     
     @IBAction func addButtonTapped(_ sender: Any) {
-        addItem(inTerrain: terrain, nodeToAdd: self.selectedNode)
+        addItem(inTerrain: terrain, nodeToAdds: self.selectedNode)
     }
     
     func registerGestureRecognizer() {
@@ -248,10 +248,10 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
                 
             
                 // once the terrain has been created, create a node on top of it
-                objectsNode.position = SCNVector3(terrain.position.x, terrain.position.y + 0.05, terrain.position.z)
+                objectsNode.position = SCNVector3(terrain.position.x, terrain.position.y + 0.002, terrain.position.z)
                 objectsNode.orientation = terrain.orientation
-                let object = createTerrainObject()
-                objectsNode.addChildNode(object)
+                //let object = createTerrainObject()
+                //objectsNode.addChildNode(object)
                 objectsNode.name = "Objects Node"
                 self.sceneView.scene.rootNode.addChildNode(objectsNode)
  
@@ -283,19 +283,23 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     }
     
     // Add the terrain to a plane when the application starts
-    func addItem(inTerrain: SCNNode, nodeToAdd: SCNNode) {
+    func addItem(inTerrain: SCNNode, nodeToAdds: SCNNode) {
+        
+        let nodeToAdd = collectionNode
         
         // let atPosition = inTerrain.position
-        nodeToAdd.removeAction(forKey: "rotateSelectedNode")
+        //nodeToAdd.removeAction(forKey: "rotateSelectedNode")
         nodeToAdd.name = "addedNode"
         self.selectedNode = nodeToAdd
         
         
-    
-        let x = randomNumbers(firstNum: -0.3, secondNum: 0.3)
-        let z = randomNumbers(firstNum: -0.3, secondNum: 0.3)
+
+        //let x = randomNumbers(firstNum: -0.3, secondNum: 0.3)
+        // let z = randomNumbers(firstNum: -0.3, secondNum: 0.3)
         
-        self.terrain.addChildNode(nodeToAdd)
+        let x = -0.4, z = -0.4
+        
+        self.objectsNode.addChildNode(nodeToAdd)
         
         let moveFrom = nodeToAdd.presentation.position
         let moveNodeTo = SCNVector3(x,0.051,z)
@@ -338,9 +342,8 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         if let selectedItem = self.selectedItem {
             let scene = SCNScene(named: "Model.scnassets/\(selectedItem).scn")
             
-            var node = (scene?.rootNode.childNode(withName: selectedItem, recursively: false))!
+            let node = (scene?.rootNode.childNode(withName: selectedItem, recursively: false))!
             
-            node = collectionNode
             // the current location and orientation of the camera view
             guard let pointOfView = sceneView.pointOfView else {return}
             

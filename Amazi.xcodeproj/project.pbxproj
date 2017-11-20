@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		180FDBFF1FC1ED630025A472 /* crops.plist in Resources */ = {isa = PBXBuildFile; fileRef = 180FDBFE1FC1ED630025A472 /* crops.plist */; };
 		186792101FA8B46A0012EC7D /* Model.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = 186792061FA8A9EB0012EC7D /* Model.scnassets */; };
 		186792111FA8B4B80012EC7D /* Solar.scn in Resources */ = {isa = PBXBuildFile; fileRef = 1867920F1FA8B2050012EC7D /* Solar.scn */; };
 		187FFAAF1FA895BB001B1B3F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 187FFAAE1FA895BB001B1B3F /* AppDelegate.swift */; };
@@ -26,6 +27,7 @@
 		180344221FBD894100D282EA /* Crop.scn */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; name = Crop.scn; path = Model.scnassets/Crop.scn; sourceTree = "<group>"; };
 		180344241FBD93D000D282EA /* Well.scn */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; name = Well.scn; path = Model.scnassets/Well.scn; sourceTree = "<group>"; };
 		180344281FBD960A00D282EA /* Water Pump.scn */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; name = "Water Pump.scn"; path = "Model.scnassets/Water Pump.scn"; sourceTree = "<group>"; };
+		180FDBFE1FC1ED630025A472 /* crops.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = crops.plist; sourceTree = "<group>"; };
 		184EBC551FC19FA700E0F4AE /* Pipe.scn */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; name = Pipe.scn; path = Model.scnassets/Pipe.scn; sourceTree = "<group>"; };
 		186792061FA8A9EB0012EC7D /* Model.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = Model.scnassets; sourceTree = "<group>"; };
 		1867920E1FA8B13D0012EC7D /* Textures */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Textures; sourceTree = "<group>"; };
@@ -99,6 +101,7 @@
 			isa = PBXGroup;
 			children = (
 				1895C30D1FC186EC0061FC6A /* pumps.plist */,
+				180FDBFE1FC1ED630025A472 /* crops.plist */,
 			);
 			path = ObjectsData;
 			sourceTree = "<group>";
@@ -173,6 +176,7 @@
 			files = (
 				18F620561FA9DF6000DAFBDB /* Textures in Resources */,
 				187FFAB91FA895BB001B1B3F /* LaunchScreen.storyboard in Resources */,
+				180FDBFF1FC1ED630025A472 /* crops.plist in Resources */,
 				186792101FA8B46A0012EC7D /* Model.scnassets in Resources */,
 				187FFAB61FA895BB001B1B3F /* Assets.xcassets in Resources */,
 				18E332B01FAB1D6C0043D129 /* Pump.scn in Resources */,
