@@ -11,4 +11,5 @@ import UIKit
 class menuCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var collectionViewLabel: UILabel!
     
+    @IBOutlet weak var collectionViewInnerView: UIView!
 }

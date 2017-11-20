@@ -12,20 +12,24 @@ import ARKit
 class ViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, ARSCNViewDelegate {
     
     // All the menu items
-    let menuArray: [String] = ["Pump", "Water Pump", "Solar", "Crop", "Well", "Pipe"]
+    let menuArray: [String] = ["Pump", "Solar", "Crop", "Well", "Pipe"]
     var selectedItem: String?
     var selectedNode = SCNNode()
-    var collectionNode = SCNNode()
+    var selectedCollectionNode = SCNNode()
     
     // Outlets for the different elements
     @IBOutlet weak var addButton: UIButton!
+    @IBOutlet weak var statusBlurViewDetails: UIVisualEffectView!
     @IBOutlet weak var menuCollectionView: UICollectionView!
+    @IBOutlet weak var statusDetails: UITextView!
     @IBOutlet weak var statusViewBar: UIView!
     @IBOutlet weak var sceneView: ARSCNView!
     @IBOutlet weak var statusLabel: UILabel!
     
     // Properties
     var firstItem = true
+    var disableRotation = false
+    var disableScale = false
     var terrain = SCNNode()
     var objectsNode = SCNNode()
     
@@ -48,7 +52,8 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         self.sceneView.delegate = self
         
         // show feature points and the world origin when the application loads up
-        sceneView.debugOptions = [ARSCNDebugOptions.showWorldOrigin, ARSCNDebugOptions.showFeaturePoints];
+        //sceneView.debugOptions = [ARSCNDebugOptions.showWorldOrigin, ARSCNDebugOptions.showFeaturePoints];
+        sceneView.debugOptions = [ARSCNDebugOptions.showFeaturePoints];
         
         // Lets scene kit automatically add lighting (omnidirectional)
         self.sceneView.autoenablesDefaultLighting = true
@@ -62,19 +67,66 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         // Set up to recognize gesture
         self.registerGestureRecognizer()
         
-        self.addCollectionOfModels()
+        self.setupStatusBar()
     }
     
-    func addCollectionOfModels() {
-        let collectionOfModels = CollectionOf3DModels(collectionName: "crops")
+    func setupStatusBar() {
+        self.statusBlurViewDetails.layer.cornerRadius = 10;
+        self.statusBlurViewDetails.layer.masksToBounds = true;
+        
+        self.addButton.layer.cornerRadius = 10;
+        self.addButton.layer.masksToBounds = true;
+        
+        self.statusLabel.text = "Scanning"
+        self.statusDetails.text = "Move your device slowly to find a flat surface"
+        
+        self.menuCollectionView.layer.cornerRadius = 10;
+        self.menuCollectionView.layer.masksToBounds = true;
+        
+    }
+    
+    func updateStatusBar(statusLabelText: String, statusDetailsText: String, length: Double, action: String) {
+        self.statusLabel.text = statusLabelText
+        self.statusDetails.text = statusDetailsText
+        UIView.animate(withDuration: 1.5, animations: {
+            self.statusBlurViewDetails.alpha = 1.0
+        })
+        
+        // If the message is supposed to stay on screen
+        if length != 0.0 {
+            DispatchQueue.main.asyncAfter(deadline: .now()) {
+                UIView.animate(withDuration: length, animations: {
+                    self.statusBlurViewDetails.alpha = 0.0
+                })
+            }
+        }
+        
+        // Change the button action based on the action sent
+        buttonFactor(action: action)
+    }
+    
+    // Change the title of the button based on the last action performed
+    func buttonFactor(action: String) {
+        self.addButton.isHidden = false
+        
+        switch action {
+            case "Add":
+                self.addButton.setTitle("Add", for: .normal)
+            case "Confirm":
+                self.addButton.setTitle("Confirm", for: .normal)
+            case "None":
+                self.addButton.isHidden = true
+            default:
+                updateStatusBar(statusLabelText: "Unknown", statusDetailsText: "An unknown action was taken", length: 5.0, action: "None")
+        }
+    }
+    
+    func addCollectionOfModels(chosenModel: String) {
+        let collectionOfModels = CollectionOf3DModels(collectionName: chosenModel)
         let models = collectionOfModels.build3DModelsFromPlist()
         collectionOfModels.setAll3DObjects(objects: models)
-        collectionNode = collectionOfModels.buildNodeWith3DObjects()
-        collectionOfModels.setNode(newNode: collectionNode)
-        
-        // place the object infront of you and then add it to the sceneView
-        //collectionNode.position = SCNVector3(0,0,-1)
-        //self.sceneView.scene.rootNode.addChildNode(collectionNode)
+        selectedCollectionNode = collectionOfModels.buildNodeWith3DObjects()
+        collectionOfModels.setNode(newNode: selectedCollectionNode)
     }
     
     // Create a terrain object
@@ -100,8 +152,20 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         return allTerrain
     }
     
-    @IBAction func addButtonTapped(_ sender: Any) {
-        addItem(inTerrain: terrain, nodeToAdds: self.selectedNode)
+    @IBAction func addButtonTapped(_ sender: UIButton) {
+        switch sender.titleLabel!.text! {
+        case "Add":
+            addItem(inNode: objectsNode, nodesToAdd: self.selectedItem!)
+            self.addButton.isHidden = true
+        case "Confirm":
+            self.disableRotation = true
+            self.disableScale = true
+            self.addButton.isHidden = true
+            self.menuCollectionView.isHidden = false
+            self.updateStatusBar(statusLabelText: "Welcome to Amazi", statusDetailsText: "To get started, tap on one of the items below", length: 10.0, action: "None")
+        default:
+            print("An empty button was pressed")
+        }
     }
     
     func registerGestureRecognizer() {
@@ -161,7 +225,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         let hitTest = sceneView.hitTest(rotateLocation)
         
         // Check if an object was rotated
-        if(!hitTest.isEmpty) {
+        if(!hitTest.isEmpty && self.disableRotation == false) {
             // get the result from the hit test
             let results: SCNHitTestResult = hitTest.first!
             
@@ -202,7 +266,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         let hitTest = sceneView.hitTest(pinchLocation)
         
         // Check if an object was pinched
-        if (!hitTest.isEmpty) {
+        if (!hitTest.isEmpty && self.disableScale == false) {
             // get the result from the hit test
             let results: SCNHitTestResult = hitTest.first!
             
@@ -246,6 +310,12 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
             if (firstItem) {
                 terrain = addTerrain(hitTestResult: hitTestResult)
                 
+                self.updateStatusBar(statusLabelText: "Scale and Rotate", statusDetailsText: "Pinch and Rotate to adjust the size of the land, once you're done, tap confirm", length: 10.0, action: "Confirm")
+                
+                // Hide feature points and disable plane detection once the terrain has been placed
+                sceneView.debugOptions = [];
+                configuration.planeDetection = [];
+                self.sceneView.session.run(configuration);
             
                 // once the terrain has been created, create a node on top of it
                 objectsNode.position = SCNVector3(terrain.position.x, terrain.position.y + 0.002, terrain.position.z)
@@ -277,15 +347,15 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         self.sceneView.scene.rootNode.addChildNode(terrain)
         
         firstItem = false
-        self.menuCollectionView.isHidden = false
         
         return terrain
     }
     
     // Add the terrain to a plane when the application starts
-    func addItem(inTerrain: SCNNode, nodeToAdds: SCNNode) {
+    func addItem(inNode: SCNNode, nodesToAdd: String) {
         
-        let nodeToAdd = collectionNode
+        self.addCollectionOfModels(chosenModel: nodesToAdd)
+        let nodeToAdd = selectedCollectionNode
         
         // let atPosition = inTerrain.position
         //nodeToAdd.removeAction(forKey: "rotateSelectedNode")
@@ -395,19 +465,22 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     
     // When ever a button is pressed you change the background to the color green
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let cell = collectionView.cellForItem(at: indexPath)
-        cell?.backgroundColor = UIColor.green
+        let cell = collectionView.cellForItem(at: indexPath) as! menuCollectionViewCell
+        cell.collectionViewInnerView.backgroundColor = UIColor.green
         
         self.selectedItem = menuArray[indexPath.row]
+        
+        self.updateStatusBar(statusLabelText: "\(self.selectedItem!) was chosen", statusDetailsText: "To place the item on the terrain tap the \"Add\" button on the right", length: 10.0, action: "Add")
+        
         showItem();
     }
     
     // Change the color of the button when it is pressed
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
-        let cell = collectionView.cellForItem(at: indexPath)
+        let cell = collectionView.cellForItem(at: indexPath) as! menuCollectionViewCell
         
         // Change the background color of the cell
-        cell?.backgroundColor = UIColor.orange;
+        cell.collectionViewInnerView.backgroundColor = UIColor.lightGray
         removeItem()
     }
     
@@ -425,6 +498,8 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         
         // Sets the label of the uicollection view to the name in the items array
         cell.collectionViewLabel.text = self.menuArray[indexPath.row]
+        cell.collectionViewInnerView.layer.cornerRadius = 10
+        cell.collectionViewInnerView.layer.masksToBounds = true
         
         return cell
     }
@@ -434,10 +509,14 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         
         // renderer is done in a separate thread so run everything that has to do with UI in the main queue
         DispatchQueue.main.async {
-            self.statusLabel.isHidden = false
-            self.statusLabel.text = "Plane detected"
-            DispatchQueue.main.asyncAfter(deadline: .now()+3) {
-                self.statusLabel.isHidden = true
+//            self.statusLabel.isHidden = false
+//            self.statusLabel.text = "Plane detected"
+            DispatchQueue.main.asyncAfter(deadline: .now()) {
+                UIView.animate(withDuration: 1.5, animations: {
+                    self.statusBlurViewDetails.alpha = 0.0
+                })
+                self.updateStatusBar(statusLabelText: "Plane Detected", statusDetailsText: "Please tap on the surface to place the land terrain", length: 0.0, action: "None")
+                //self.statusLabel.isHidden = true
             }
         }
     }
