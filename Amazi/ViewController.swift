@@ -371,7 +371,11 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         
         self.objectsNode.addChildNode(nodeToAdd)
         
-        let moveFrom = nodeToAdd.presentation.position
+        let moveFrom = SCNVector3(
+            self.objectsNode.presentation.position.x,
+            self.objectsNode.presentation.position.y + 1,
+            self.objectsNode.presentation.position.z
+        )
         let moveNodeTo = SCNVector3(x,0.051,z)
         
         animateNode(node: nodeToAdd, fromValue: moveFrom, toValue: moveNodeTo)
@@ -392,7 +396,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         
         // presentation is the current state of the object in the sceneview
         // this records the starting point of the animation
-        move.fromValue = node.presentation.position
+        move.fromValue = fromValue
         
         // to change the duration of the animation
         move.duration = 1
@@ -451,7 +455,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
             node.runAction(rotateForever, forKey: "rotateSelectedNode")
             self.selectedNode = node
             
-            self.sceneView.scene.rootNode.addChildNode(self.selectedNode)
+            //self.sceneView.scene.rootNode.addChildNode(self.selectedNode)
         }
         
     }
