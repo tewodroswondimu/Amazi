@@ -525,6 +525,28 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         }
     }
 
+    // When the snap button click the
+    @IBAction func takeSnapshot(_ sender: Any) {
+        // Get the camera transform
+        guard let currentFrame = sceneView.session.currentFrame else {
+            return
+        }
+        
+        // Create an image plane with a snapshot of the view
+        let imagePlane = SCNPlane(width: sceneView.bounds.width / 6000, height: sceneView.bounds.height / 6000)
+        imagePlane.firstMaterial?.diffuse.contents = sceneView.snapshot()
+        imagePlane.firstMaterial?.lightingModel = .constant
+        
+        // Create a plane node and add it to the scene
+        let planeNode = SCNNode(geometry: imagePlane)
+        sceneView.scene.rootNode.addChildNode(planeNode)
+        
+        // Set the transform of the node to be 10cm in front of the camera
+        var translation = matrix_identity_float4x4
+        translation.columns.3.z = -0.1
+        planeNode.simdTransform = matrix_multiply(currentFrame.camera.transform, translation)
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
