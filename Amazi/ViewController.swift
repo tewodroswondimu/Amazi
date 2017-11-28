@@ -336,7 +336,11 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
             let node = hitTestResult.node
             
             // If the node that was tapped is a snapshot, remove it from the scene
-            if (node.name == "imagePlane") {
+            if (node.name == "snapshot") {
+                // Save the image to the camera roll
+                let snapshotTaken = node.geometry?.firstMaterial?.diffuse.contents as! UIImage
+                UIImageWriteToSavedPhotosAlbum(snapshotTaken, self, #selector(snapshotSaved(_:didFinishSavingWithError:contextInfo:)), nil)
+                
                 node.removeFromParentNode()
             } else {
                 print("No match")
@@ -551,15 +555,13 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         
         // Create a plane node and add it to the scene
         let planeNode = SCNNode(geometry: imagePlane)
-        planeNode.name = "imagePlane"
+        planeNode.name = "snapshot"
         sceneView.scene.rootNode.addChildNode(planeNode)
         
         // Set the transform of the node to be 10cm in front of the camera
         var translation = matrix_identity_float4x4
         translation.columns.3.z = -0.1
         planeNode.simdTransform = matrix_multiply(currentFrame.camera.transform, translation)
-        
-        UIImageWriteToSavedPhotosAlbum(snapshotTaken, self, #selector(snapshotSaved(_:didFinishSavingWithError:contextInfo:)), nil)
     }
     
     @objc func snapshotSaved(_ image: UIImage, didFinishSavingWithError error: Error?, contextInfo: UnsafeRawPointer) {
