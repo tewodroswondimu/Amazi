@@ -5,7 +5,9 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>NSCameraUsageDescription</key>
-	<string></string>
+	<string>This app requires the use of your camera to work</string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>Please give permission to save pictures to your camera roll</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>

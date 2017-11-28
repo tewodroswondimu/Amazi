@@ -94,8 +94,8 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         
         // If the message is supposed to stay on screen
         if length != 0.0 {
-            DispatchQueue.main.asyncAfter(deadline: .now()) {
-                UIView.animate(withDuration: length, animations: {
+            DispatchQueue.main.asyncAfter(deadline: .now() + length) {
+                UIView.animate(withDuration: 1.5, animations: {
                     self.statusBlurViewDetails.alpha = 0.0
                 })
             }
@@ -303,33 +303,44 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         let sceneView = sender.view as! ARSCNView
         let tapLocation = sender.location(in: sceneView)
         
-        let hitTest = sceneView.hitTest(tapLocation, types: .existingPlaneUsingExtent)
-        if (!hitTest.isEmpty) {
+        if (firstItem) {
+            let hitTest = sceneView.hitTest(tapLocation, types: .existingPlaneUsingExtent)
+            if (!hitTest.isEmpty) {
+                let hitTestResult = hitTest.first!
+                
+                    terrain = addTerrain(hitTestResult: hitTestResult)
+                
+                    self.updateStatusBar(statusLabelText: "Scale and Rotate", statusDetailsText: "Pinch and Rotate to adjust the size of the land, once you're done, tap confirm", length: 10.0, action: "Confirm")
+                
+                    // Hide feature points and disable plane detection once the terrain has been placed
+                    sceneView.debugOptions = [];
+                    configuration.planeDetection = [];
+                    self.sceneView.session.run(configuration);
+                
+                    // once the terrain has been created, create a node on top of it
+                    objectsNode.position = SCNVector3(terrain.position.x, terrain.position.y + 0.002, terrain.position.z)
+                    objectsNode.orientation = terrain.orientation
+                    //let object = createTerrainObject()
+                    //objectsNode.addChildNode(object)
+                    objectsNode.name = "Objects Node"
+                    self.sceneView.scene.rootNode.addChildNode(objectsNode)
+            }
+            else {
+                print("No match")
+            }
+        } else {
+            let hitTest = sceneView.hitTest(tapLocation)
             let hitTestResult = hitTest.first!
             
-            if (firstItem) {
-                terrain = addTerrain(hitTestResult: hitTestResult)
-                
-                self.updateStatusBar(statusLabelText: "Scale and Rotate", statusDetailsText: "Pinch and Rotate to adjust the size of the land, once you're done, tap confirm", length: 10.0, action: "Confirm")
-                
-                // Hide feature points and disable plane detection once the terrain has been placed
-                sceneView.debugOptions = [];
-                configuration.planeDetection = [];
-                self.sceneView.session.run(configuration);
+            // get the node from the result
+            let node = hitTestResult.node
             
-                // once the terrain has been created, create a node on top of it
-                objectsNode.position = SCNVector3(terrain.position.x, terrain.position.y + 0.002, terrain.position.z)
-                objectsNode.orientation = terrain.orientation
-                //let object = createTerrainObject()
-                //objectsNode.addChildNode(object)
-                objectsNode.name = "Objects Node"
-                self.sceneView.scene.rootNode.addChildNode(objectsNode)
- 
+            // If the node that was tapped is a snapshot, remove it from the scene
+            if (node.name == "imagePlane") {
+                node.removeFromParentNode()
             } else {
+                print("No match")
             }
-        }
-        else {
-            print("No match")
         }
     }
     
@@ -534,17 +545,30 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         
         // Create an image plane with a snapshot of the view
         let imagePlane = SCNPlane(width: sceneView.bounds.width / 6000, height: sceneView.bounds.height / 6000)
-        imagePlane.firstMaterial?.diffuse.contents = sceneView.snapshot()
+        let snapshotTaken = sceneView.snapshot()
+        imagePlane.firstMaterial?.diffuse.contents = snapshotTaken
         imagePlane.firstMaterial?.lightingModel = .constant
         
         // Create a plane node and add it to the scene
         let planeNode = SCNNode(geometry: imagePlane)
+        planeNode.name = "imagePlane"
         sceneView.scene.rootNode.addChildNode(planeNode)
         
         // Set the transform of the node to be 10cm in front of the camera
         var translation = matrix_identity_float4x4
         translation.columns.3.z = -0.1
         planeNode.simdTransform = matrix_multiply(currentFrame.camera.transform, translation)
+        
+        UIImageWriteToSavedPhotosAlbum(snapshotTaken, self, #selector(snapshotSaved(_:didFinishSavingWithError:contextInfo:)), nil)
+    }
+    
+    @objc func snapshotSaved(_ image: UIImage, didFinishSavingWithError error: Error?, contextInfo: UnsafeRawPointer) {
+        
+        if error == nil {
+            self.updateStatusBar(statusLabelText: "Image Saved", statusDetailsText: "The image has been saved to your camera roll, tap to dismiss", length: 10, action: "None")
+        } else {
+            self.updateStatusBar(statusLabelText: "Error Saving Image", statusDetailsText: "There was an error saving the image, please try again", length: 10, action: "None")
+        }
     }
     
     override func didReceiveMemoryWarning() {
