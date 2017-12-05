@@ -147,6 +147,7 @@
 			<string>0</string>
 		</dict>
 	</dict>
+
 	<dict>
 		<key>description</key>
 		<dict>
@@ -176,6 +177,268 @@
 			<string>0</string>
 		</dict>
 	</dict>
+	<dict>
+		<key>description</key>
+		<dict>
+			<key>name</key>
+			<string>Crop</string>
+			<key>price</key>
+			<string>20</string>
+			<key>dimensions</key>
+			<string>2 cm radius, 1m length</string>
+		</dict>
+		<key>location</key>
+		<dict>
+			<key>x</key>
+			<string>0</string>
+			<key>y</key>
+			<string>-0.025</string>
+			<key>z</key>
+			<string>0.27725</string>
+		</dict>
+		<key>orientation</key>
+		<dict>
+			<key>x</key>
+			<string>0</string>
+			<key>y</key>
+			<string>0</string>
+			<key>z</key>
+			<string>0</string>
+		</dict>
+	</dict>
+	<dict>
+		<key>description</key>
+		<dict>
+			<key>name</key>
+			<string>Crop</string>
+			<key>price</key>
+			<string>20</string>
+			<key>dimensions</key>
+			<string>2 cm radius, 1m length</string>
+		</dict>
+		<key>location</key>
+		<dict>
+			<key>x</key>
+			<string>0.088625</string>
+			<key>y</key>
+			<string>-0.025</string>
+			<key>z</key>
+			<string>0.27725</string>
+		</dict>
+		<key>orientation</key>
+		<dict>
+			<key>x</key>
+			<string>0</string>
+			<key>y</key>
+			<string>0</string>
+			<key>z</key>
+			<string>0</string>
+		</dict>
+	</dict>
+	<dict>
+		<key>description</key>
+		<dict>
+			<key>name</key>
+			<string>Crop</string>
+			<key>price</key>
+			<string>20</string>
+			<key>dimensions</key>
+			<string>2 cm radius, 1m length</string>
+		</dict>
+		<key>location</key>
+		<dict>
+			<key>x</key>
+			<string>0.17725</string>
+			<key>y</key>
+			<string>-0.025</string>
+			<key>z</key>
+			<string>0.27725</string>
+		</dict>
+		<key>orientation</key>
+		<dict>
+			<key>x</key>
+			<string>0</string>
+			<key>y</key>
+			<string>0</string>
+			<key>z</key>
+			<string>0</string>
+		</dict>
+	</dict>
+	<dict>
+		<key>description</key>
+		<dict>
+			<key>name</key>
+			<string>Crop</string>
+			<key>price</key>
+			<string>20</string>
+			<key>dimensions</key>
+			<string>2 cm radius, 1m length</string>
+		</dict>
+		<key>location</key>
+		<dict>
+			<key>x</key>
+			<string>0</string>
+			<key>y</key>
+			<string>-0.025</string>
+			<key>z</key>
+			<string>0.365875</string>
+		</dict>
+		<key>orientation</key>
+		<dict>
+			<key>x</key>
+			<string>0</string>
+			<key>y</key>
+			<string>0</string>
+			<key>z</key>
+			<string>0</string>
+		</dict>
+	</dict>
+
+	<dict>
+		<key>description</key>
+		<dict>
+			<key>name</key>
+			<string>Crop</string>
+			<key>price</key>
+			<string>20</string>
+			<key>dimensions</key>
+			<string>2 cm radius, 1m length</string>
+		</dict>
+		<key>location</key>
+		<dict>
+			<key>x</key>
+			<string>0.088625</string>
+			<key>y</key>
+			<string>-0.025</string>
+			<key>z</key>
+			<string>0.365875</string>
+		</dict>
+		<key>orientation</key>
+		<dict>
+			<key>x</key>
+			<string>0</string>
+			<key>y</key>
+			<string>0</string>
+			<key>z</key>
+			<string>0</string>
+		</dict>
+	</dict>
+	<dict>
+		<key>description</key>
+		<dict>
+			<key>name</key>
+			<string>Crop</string>
+			<key>price</key>
+			<string>20</string>
+			<key>dimensions</key>
+			<string>2 cm radius, 1m length</string>
+		</dict>
+		<key>location</key>
+		<dict>
+			<key>x</key>
+			<string>0.17725</string>
+			<key>y</key>
+			<string>-0.025</string>
+			<key>z</key>
+			<string>0.365875</string>
+		</dict>
+		<key>orientation</key>
+		<dict>
+			<key>x</key>
+			<string>0</string>
+			<key>y</key>
+			<string>0</string>
+			<key>z</key>
+			<string>0</string>
+		</dict>
+	</dict>
+	<dict>
+		<key>description</key>
+		<dict>
+			<key>name</key>
+			<string>Crop</string>
+			<key>price</key>
+			<string>20</string>
+			<key>dimensions</key>
+			<string>2 cm radius, 1m length</string>
+		</dict>
+		<key>location</key>
+		<dict>
+			<key>x</key>
+			<string>0</string>
+			<key>y</key>
+			<string>-0.025</string>
+			<key>z</key>
+			<string>0.4545</string>
+		</dict>
+		<key>orientation</key>
+		<dict>
+			<key>x</key>
+			<string>0</string>
+			<key>y</key>
+			<string>0</string>
+			<key>z</key>
+			<string>0</string>
+		</dict>
+	</dict>
+	<dict>
+		<key>description</key>
+		<dict>
+			<key>name</key>
+			<string>Crop</string>
+			<key>price</key>
+			<string>20</string>
+			<key>dimensions</key>
+			<string>2 cm radius, 1m length</string>
+		</dict>
+		<key>location</key>
+		<dict>
+			<key>x</key>
+			<string>0.088625</string>
+			<key>y</key>
+			<string>-0.025</string>
+			<key>z</key>
+			<string>0.4545</string>
+		</dict>
+		<key>orientation</key>
+		<dict>
+			<key>x</key>
+			<string>0</string>
+			<key>y</key>
+			<string>0</string>
+			<key>z</key>
+			<string>0</string>
+		</dict>
+	</dict>
+	<dict>
+		<key>description</key>
+		<dict>
+			<key>name</key>
+			<string>Crop</string>
+			<key>price</key>
+			<string>20</string>
+			<key>dimensions</key>
+			<string>2 cm radius, 1m length</string>
+		</dict>
+		<key>location</key>
+		<dict>
+			<key>x</key>
+			<string>0.17725</string>
+			<key>y</key>
+			<string>-0.025</string>
+			<key>z</key>
+			<string>0.4545</string>
+		</dict>
+		<key>orientation</key>
+		<dict>
+			<key>x</key>
+			<string>0</string>
+			<key>y</key>
+			<string>0</string>
+			<key>z</key>
+			<string>0</string>
+		</dict>
+	</dict>
 
     <dict>
         <key>description</key>
@@ -190,7 +453,211 @@
         <key>location</key>
         <dict>
             <key>x</key>
+            <string>0.3101875</string>
+            <key>y</key>
+            <string>-0.025</string>
+            <key>z</key>
+            <string>0.1</string>
+        </dict>
+        <key>orientation</key>
+        <dict>
+            <key>x</key>
             <string>0</string>
+            <key>y</key>
+            <string>0</string>
+            <key>z</key>
+            <string>0</string>
+        </dict>
+    </dict>
+    <dict>
+        <key>description</key>
+        <dict>
+            <key>name</key>
+            <string>Crop</string>
+            <key>price</key>
+            <string>20</string>
+            <key>dimensions</key>
+            <string>2 cm radius, 1m length</string>
+        </dict>
+        <key>location</key>
+        <dict>
+            <key>x</key>
+            <string>0.3101875</string>
+            <key>y</key>
+            <string>-0.025</string>
+            <key>z</key>
+            <string>0.188625</string>
+        </dict>
+        <key>orientation</key>
+        <dict>
+            <key>x</key>
+            <string>0</string>
+            <key>y</key>
+            <string>0</string>
+            <key>z</key>
+            <string>0</string>
+        </dict>
+    </dict>
+    <dict>
+        <key>description</key>
+        <dict>
+            <key>name</key>
+            <string>Crop</string>
+            <key>price</key>
+            <string>20</string>
+            <key>dimensions</key>
+            <string>2 cm radius, 1m length</string>
+        </dict>
+        <key>location</key>
+        <dict>
+            <key>x</key>
+            <string>0.3101875</string>
+            <key>y</key>
+            <string>-0.025</string>
+            <key>z</key>
+            <string>0.27725</string>
+        </dict>
+        <key>orientation</key>
+        <dict>
+            <key>x</key>
+            <string>0</string>
+            <key>y</key>
+            <string>0</string>
+            <key>z</key>
+            <string>0</string>
+        </dict>
+    </dict>
+	<dict>
+		<key>description</key>
+		<dict>
+			<key>name</key>
+			<string>Crop</string>
+			<key>price</key>
+			<string>20</string>
+			<key>dimensions</key>
+			<string>2 cm radius, 1m length</string>
+		</dict>
+		<key>location</key>
+		<dict>
+			<key>x</key>
+			<string>0.3101875</string>
+			<key>y</key>
+			<string>-0.025</string>
+			<key>z</key>
+			<string>0.365875</string>
+		</dict>
+		<key>orientation</key>
+		<dict>
+			<key>x</key>
+			<string>0</string>
+			<key>y</key>
+			<string>0</string>
+			<key>z</key>
+			<string>0</string>
+		</dict>
+	</dict>
+	<dict>
+		<key>description</key>
+		<dict>
+			<key>name</key>
+			<string>Crop</string>
+			<key>price</key>
+			<string>20</string>
+			<key>dimensions</key>
+			<string>2 cm radius, 1m length</string>
+		</dict>
+		<key>location</key>
+		<dict>
+			<key>x</key>
+			<string>0.3101875</string>
+			<key>y</key>
+			<string>-0.025</string>
+			<key>z</key>
+			<string>0.4545</string>
+		</dict>
+		<key>orientation</key>
+		<dict>
+			<key>x</key>
+			<string>0</string>
+			<key>y</key>
+			<string>0</string>
+			<key>z</key>
+			<string>0</string>
+		</dict>
+	</dict>
+
+    <dict>
+        <key>description</key>
+        <dict>
+            <key>name</key>
+            <string>Crop</string>
+            <key>price</key>
+            <string>20</string>
+            <key>dimensions</key>
+            <string>2 cm radius, 1m length</string>
+        </dict>
+        <key>location</key>
+        <dict>
+            <key>x</key>
+            <string>0.3545</string>
+            <key>y</key>
+            <string>-0.025</string>
+            <key>z</key>
+            <string>0.1</string>
+        </dict>
+        <key>orientation</key>
+        <dict>
+            <key>x</key>
+            <string>0</string>
+            <key>y</key>
+            <string>0</string>
+            <key>z</key>
+            <string>0</string>
+        </dict>
+    </dict>
+    <dict>
+        <key>description</key>
+        <dict>
+            <key>name</key>
+            <string>Crop</string>
+            <key>price</key>
+            <string>20</string>
+            <key>dimensions</key>
+            <string>2 cm radius, 1m length</string>
+        </dict>
+        <key>location</key>
+        <dict>
+            <key>x</key>
+            <string>0.3545</string>
+            <key>y</key>
+            <string>-0.025</string>
+            <key>z</key>
+            <string>0.188625</string>
+        </dict>
+        <key>orientation</key>
+        <dict>
+            <key>x</key>
+            <string>0</string>
+            <key>y</key>
+            <string>0</string>
+            <key>z</key>
+            <string>0</string>
+        </dict>
+    </dict>
+    <dict>
+        <key>description</key>
+        <dict>
+            <key>name</key>
+            <string>Crop</string>
+            <key>price</key>
+            <string>20</string>
+            <key>dimensions</key>
+            <string>2 cm radius, 1m length</string>
+        </dict>
+        <key>location</key>
+        <dict>
+            <key>x</key>
+            <string>0.3545</string>
             <key>y</key>
             <string>-0.025</string>
             <key>z</key>
@@ -219,66 +686,7 @@
         <key>location</key>
         <dict>
             <key>x</key>
-            <string>0.088625</string>
-            <key>y</key>
-            <string>-0.025</string>
-            <key>z</key>
-            <string>0.27725</string>
-        </dict>
-        <key>orientation</key>
-        <dict>
-            <key>x</key>
-            <string>0</string>
-            <key>y</key>
-            <string>0</string>
-            <key>z</key>
-            <string>0</string>
-        </dict>
-    </dict>
-    <dict>
-        <key>description</key>
-        <dict>
-            <key>name</key>
-            <string>Crop</string>
-            <key>price</key>
-            <string>20</string>
-            <key>dimensions</key>
-            <string>2 cm radius, 1m length</string>
-        </dict>
-        <key>location</key>
-        <dict>
-            <key>x</key>
-            <string>0.17725</string>
-            <key>y</key>
-            <string>-0.025</string>
-            <key>z</key>
-            <string>0.27725</string>
-        </dict>
-        <key>orientation</key>
-        <dict>
-            <key>x</key>
-            <string>0</string>
-            <key>y</key>
-            <string>0</string>
-            <key>z</key>
-            <string>0</string>
-        </dict>
-    </dict>
-
-    <dict>
-        <key>description</key>
-        <dict>
-            <key>name</key>
-            <string>Crop</string>
-            <key>price</key>
-            <string>20</string>
-            <key>dimensions</key>
-            <string>2 cm radius, 1m length</string>
-        </dict>
-        <key>location</key>
-        <dict>
-            <key>x</key>
-            <string>0</string>
+            <string>0.3545</string>
             <key>y</key>
             <string>-0.025</string>
             <key>z</key>
@@ -307,67 +715,7 @@
         <key>location</key>
         <dict>
             <key>x</key>
-            <string>0.088625</string>
-            <key>y</key>
-            <string>-0.025</string>
-            <key>z</key>
-            <string>0.365875</string>
-        </dict>
-        <key>orientation</key>
-        <dict>
-            <key>x</key>
-            <string>0</string>
-            <key>y</key>
-            <string>0</string>
-            <key>z</key>
-            <string>0</string>
-        </dict>
-    </dict>
-    <dict>
-        <key>description</key>
-        <dict>
-            <key>name</key>
-            <string>Crop</string>
-            <key>price</key>
-            <string>20</string>
-            <key>dimensions</key>
-            <string>2 cm radius, 1m length</string>
-        </dict>
-        <key>location</key>
-        <dict>
-            <key>x</key>
-            <string>0.17725</string>
-            <key>y</key>
-            <string>-0.025</string>
-            <key>z</key>
-            <string>0.365875</string>
-        </dict>
-        <key>orientation</key>
-        <dict>
-            <key>x</key>
-            <string>0</string>
-            <key>y</key>
-            <string>0</string>
-            <key>z</key>
-            <string>0</string>
-        </dict>
-    </dict>
-
-
-    <dict>
-        <key>description</key>
-        <dict>
-            <key>name</key>
-            <string>Crop</string>
-            <key>price</key>
-            <string>20</string>
-            <key>dimensions</key>
-            <string>2 cm radius, 1m length</string>
-        </dict>
-        <key>location</key>
-        <dict>
-            <key>x</key>
-            <string>0</string>
+            <string>0.3545</string>
             <key>y</key>
             <string>-0.025</string>
             <key>z</key>
@@ -383,6 +731,7 @@
             <string>0</string>
         </dict>
     </dict>
+
     <dict>
         <key>description</key>
         <dict>
@@ -396,11 +745,11 @@
         <key>location</key>
         <dict>
             <key>x</key>
-            <string>0.088625</string>
+            <string>0.3988125</string>
             <key>y</key>
             <string>-0.025</string>
             <key>z</key>
-            <string>0.4545</string>
+            <string>0.1</string>
         </dict>
         <key>orientation</key>
         <dict>
@@ -425,7 +774,94 @@
         <key>location</key>
         <dict>
             <key>x</key>
-            <string>0.17725</string>
+            <string>0.3988125</string>
+            <key>y</key>
+            <string>-0.025</string>
+            <key>z</key>
+            <string>0.188625</string>
+        </dict>
+        <key>orientation</key>
+        <dict>
+            <key>x</key>
+            <string>0</string>
+            <key>y</key>
+            <string>0</string>
+            <key>z</key>
+            <string>0</string>
+        </dict>
+    </dict>
+    <dict>
+        <key>description</key>
+        <dict>
+            <key>name</key>
+            <string>Crop</string>
+            <key>price</key>
+            <string>20</string>
+            <key>dimensions</key>
+            <string>2 cm radius, 1m length</string>
+        </dict>
+        <key>location</key>
+        <dict>
+            <key>x</key>
+            <string>0.3988125</string>
+            <key>y</key>
+            <string>-0.025</string>
+            <key>z</key>
+            <string>0.27725</string>
+        </dict>
+        <key>orientation</key>
+        <dict>
+            <key>x</key>
+            <string>0</string>
+            <key>y</key>
+            <string>0</string>
+            <key>z</key>
+            <string>0</string>
+        </dict>
+    </dict>
+    <dict>
+        <key>description</key>
+        <dict>
+            <key>name</key>
+            <string>Crop</string>
+            <key>price</key>
+            <string>20</string>
+            <key>dimensions</key>
+            <string>2 cm radius, 1m length</string>
+        </dict>
+        <key>location</key>
+        <dict>
+            <key>x</key>
+            <string>0.3988125</string>
+            <key>y</key>
+            <string>-0.025</string>
+            <key>z</key>
+            <string>0.365875</string>
+        </dict>
+        <key>orientation</key>
+        <dict>
+            <key>x</key>
+            <string>0</string>
+            <key>y</key>
+            <string>0</string>
+            <key>z</key>
+            <string>0</string>
+        </dict>
+    </dict>
+    <dict>
+        <key>description</key>
+        <dict>
+            <key>name</key>
+            <string>Crop</string>
+            <key>price</key>
+            <string>20</string>
+            <key>dimensions</key>
+            <string>2 cm radius, 1m length</string>
+        </dict>
+        <key>location</key>
+        <dict>
+            <key>x</key>
+            <string>0.3988125</string>
             <key>y</key>
             <string>-0.025</string>
             <key>z</key>
