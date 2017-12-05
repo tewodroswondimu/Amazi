@@ -15,7 +15,10 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     let menuArray: [String] = ["Pump", "Solar", "Crop", "Well", "Pipe"]
     var selectedItem: String?
     var selectedNode = SCNNode()
+    var selectedNodePreviousPosition = SCNVector3()
+    var selectedNodePreviousOrientation = SCNQuaternion()
     var selectedCollectionNode = SCNNode()
+    var selectedNodeStatus: Bool = false
     
     // Outlets for the different elements
     @IBOutlet weak var addButton: UIButton!
@@ -342,10 +345,43 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
                 UIImageWriteToSavedPhotosAlbum(snapshotTaken, self, #selector(snapshotSaved(_:didFinishSavingWithError:contextInfo:)), nil)
                 
                 node.removeFromParentNode()
+            } else if (node.name != "terrain") {
+                if selectedNodeStatus {
+                    self.selectedNode.removeAction(forKey: "rotateSelectedNode")
+                    self.selectedNode.orientation = selectedNodePreviousOrientation
+                    animateNode(node: self.selectedNode, fromValue: self.selectedNode.position, toValue: selectedNodePreviousPosition)
+                    self.selectedNode.position = selectedNodePreviousPosition
+                    selectedNodeStatus = false
+                    
+                    if (self.selectedNode.animationKeys.isEmpty) {
+                        highlightItem(node: node)
+                    }
+                }
+                else {
+                    highlightItem(node: node)
+                }
             } else {
                 print("No match")
             }
         }
+    }
+    
+    // diplays an item with it's details
+    func highlightItem(node: SCNNode) {
+        
+        selectedNodePreviousPosition = node.position
+        let moveNodeTo = SCNVector3(node.position.x,node.position.y + 0.1,node.position.z)
+        
+        animateNode(node: node, fromValue: selectedNodePreviousPosition, toValue: moveNodeTo)
+        node.position = moveNodeTo
+        
+        // rotate the node around itself
+        let nodeRotateAction = SCNAction.rotateBy(x: 0, y: CGFloat(360.degreesToRadians), z: 0, duration: 8)
+        let rotateForever = SCNAction.repeatForever(nodeRotateAction)
+        node.runAction(rotateForever, forKey: "rotateSelectedNode")
+        selectedNodePreviousOrientation = node.orientation
+        self.selectedNode = node
+        self.selectedNodeStatus = true
     }
     
     func addTerrain(hitTestResult: ARHitTestResult) -> SCNNode {
