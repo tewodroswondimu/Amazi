@@ -13,6 +13,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     
     // All the menu items
     let menuArray: [String] = ["Pump", "Solar", "Crop", "Well", "Pipe"]
+    
     var selectedItem: String?
     var selectedNode = SCNNode()
     var selectedNodePreviousPosition = SCNVector3()
@@ -28,6 +29,22 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     @IBOutlet weak var statusViewBar: UIView!
     @IBOutlet weak var sceneView: ARSCNView!
     @IBOutlet weak var statusLabel: UILabel!
+    
+    @IBOutlet weak var detailsImageView: UIImageView!
+    @IBOutlet weak var detailsItemName: UILabel!
+    @IBOutlet weak var detailsItemDetailTextView: UITextView!
+    @IBOutlet weak var detailsPrice: UILabel!
+    @IBOutlet weak var detailsDimensions: UILabel!
+    @IBOutlet weak var detailsBlurView: UIVisualEffectView!
+    
+    let details: [String: [String: String]] =
+        ["Crop":
+            ["name": "Crop", "price": "price", "details": "details", "dimensions": "dimensions"],
+         "Pump":
+            ["name": "Pump", "price": "price", "details": "details", "dimensions": "dimensions"],
+         "Well":
+            ["name": "Well", "price": "price", "details": "details", "dimensions": "dimensions"]
+        ]
     
     // Properties
     var firstItem = true
@@ -86,6 +103,23 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         self.menuCollectionView.layer.cornerRadius = 10;
         self.menuCollectionView.layer.masksToBounds = true;
         
+        self.detailsBlurView.layer.cornerRadius = 10;
+        self.detailsBlurView.layer.masksToBounds = true;
+        self.detailsBlurView.isHidden = true
+        self.detailsBlurView.alpha = 0.0
+        
+        self.detailsItemName.text = "default name"
+        self.detailsPrice.text = "0.1"
+        self.detailsDimensions.text = "X Dimensions"
+        self.detailsItemDetailTextView.text = "Something something"
+    }
+    
+    func updateDetailsBar(name: String, price: String, details: String, dimensions: String) {
+        self.detailsImageView.image = UIImage(named: name)
+        self.detailsItemName.text = name
+        self.detailsPrice.text = price
+        self.detailsDimensions.text = dimensions
+        self.detailsItemDetailTextView.text = details
     }
     
     func updateStatusBar(statusLabelText: String, statusDetailsText: String, length: Double, action: String) {
@@ -117,6 +151,8 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
                 self.addButton.setTitle("Add", for: .normal)
             case "Confirm":
                 self.addButton.setTitle("Confirm", for: .normal)
+            case "Done":
+                self.addButton.setTitle("Done", for: .normal)
             case "None":
                 self.addButton.isHidden = true
             default:
@@ -129,6 +165,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         let models = collectionOfModels.build3DModelsFromPlist()
         collectionOfModels.setAll3DObjects(objects: models)
         selectedCollectionNode = collectionOfModels.buildNodeWith3DObjects()
+        selectedCollectionNode.name = chosenModel
         collectionOfModels.setNode(newNode: selectedCollectionNode)
     }
     
@@ -159,6 +196,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         switch sender.titleLabel!.text! {
         case "Add":
             addItem(inNode: objectsNode, nodesToAdd: self.selectedItem!)
+            
             self.addButton.isHidden = true
         case "Confirm":
             self.disableRotation = true
@@ -166,6 +204,15 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
             self.addButton.isHidden = true
             self.menuCollectionView.isHidden = false
             self.updateStatusBar(statusLabelText: "Welcome to Amazi", statusDetailsText: "To get started, tap on one of the items below", length: 10.0, action: "None")
+        case "Done":
+            self.removeHightlightedItem()
+            self.addButton.isHidden = true
+            UIView.animate(withDuration: 1.5, animations: {
+                self.detailsBlurView.alpha = 0.0
+            }, completion: {
+                (value: Bool) in
+                self.detailsBlurView.isHidden = true
+            })
         default:
             print("An empty button was pressed")
         }
@@ -347,11 +394,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
                 node.removeFromParentNode()
             } else if (node.name != "terrain") {
                 if selectedNodeStatus {
-                    self.selectedNode.removeAction(forKey: "rotateSelectedNode")
-                    self.selectedNode.orientation = selectedNodePreviousOrientation
-                    animateNode(node: self.selectedNode, fromValue: self.selectedNode.position, toValue: selectedNodePreviousPosition)
-                    self.selectedNode.position = selectedNodePreviousPosition
-                    selectedNodeStatus = false
+                    self.removeHightlightedItem()
                     
                     if (self.selectedNode.animationKeys.isEmpty) {
                         highlightItem(node: node)
@@ -366,8 +409,40 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         }
     }
     
+    func removeHightlightedItem() {
+        self.selectedNode.removeAction(forKey: "rotateSelectedNode")
+        self.selectedNode.orientation = selectedNodePreviousOrientation
+        animateNode(node: self.selectedNode, fromValue: self.selectedNode.position, toValue: selectedNodePreviousPosition)
+        self.selectedNode.position = selectedNodePreviousPosition
+        selectedNodeStatus = false
+    }
+    
     // diplays an item with it's details
     func highlightItem(node: SCNNode) {
+        self.detailsBlurView.isHidden = false
+        UIView.animate(withDuration: 1.5, animations: {
+            self.detailsBlurView.alpha = 1.0
+        })
+        if let name = node.parent?.name {
+            
+            let objectDetails: [String: String]
+            switch name {
+                case "Crop":
+                    objectDetails = self.details["Crop"]!
+                case "Pump":
+                    objectDetails = self.details["Pump"]!
+                case "Well":
+                    objectDetails = self.details["Well"]!
+                default:
+                    objectDetails = self.details["Crop"]!
+            }
+            let objectName = objectDetails["name"]
+            let price = objectDetails["price"]
+            let details = objectDetails["details"]
+            let dimensions = objectDetails["dimensions"]
+            self.updateDetailsBar(name: objectName!, price: price!, details: details!, dimensions: dimensions!)
+            print("The name of the node's parent is \(name)")
+        }
         
         selectedNodePreviousPosition = node.position
         let moveNodeTo = SCNVector3(node.position.x,node.position.y + 0.1,node.position.z)
@@ -382,6 +457,8 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         selectedNodePreviousOrientation = node.orientation
         self.selectedNode = node
         self.selectedNodeStatus = true
+        
+        buttonFactor(action: "Done")
     }
     
     func addTerrain(hitTestResult: ARHitTestResult) -> SCNNode {
@@ -405,12 +482,13 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     // Add the terrain to a plane when the application starts
     func addItem(inNode: SCNNode, nodesToAdd: String) {
         
+        
         self.addCollectionOfModels(chosenModel: nodesToAdd)
         let nodeToAdd = selectedCollectionNode
         
         // let atPosition = inTerrain.position
         //nodeToAdd.removeAction(forKey: "rotateSelectedNode")
-        nodeToAdd.name = "addedNode"
+        //nodeToAdd.name = "addedNode"
         self.selectedNode = nodeToAdd
         
         
@@ -525,6 +603,17 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         
         self.selectedItem = menuArray[indexPath.row]
         
+        // Remove anything that's already on screen
+        if selectedNodeStatus {
+            self.removeHightlightedItem()
+            UIView.animate(withDuration: 1.5, animations: {
+                self.detailsBlurView.alpha = 0.0
+            }, completion: {
+                (value: Bool) in
+                self.detailsBlurView.isHidden = true
+            })
+        }
+        
         self.updateStatusBar(statusLabelText: "\(self.selectedItem!) was chosen", statusDetailsText: "To place the item on the terrain tap the \"Add\" button on the right", length: 10.0, action: "Add")
         
         showItem();
@@ -618,7 +707,6 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
 extension Int {
     var degreesToRadians: Double { return Double(self) * .pi/180 }
 }
-
 
 // Modifies the binary operator + to add two SCNVector3s and create one SCNVector3
 func +(left: SCNVector3, right: SCNVector3) -> SCNVector3 {

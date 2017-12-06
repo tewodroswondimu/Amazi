@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		180FDBFF1FC1ED630025A472 /* Crop.plist in Resources */ = {isa = PBXBuildFile; fileRef = 180FDBFE1FC1ED630025A472 /* Crop.plist */; };
+		1811E1191FD7DA250075CF27 /* Crop.png in Resources */ = {isa = PBXBuildFile; fileRef = 1811E1171FD7DA230075CF27 /* Crop.png */; };
+		1811E11A1FD7DA250075CF27 /* Pump.png in Resources */ = {isa = PBXBuildFile; fileRef = 1811E1181FD7DA240075CF27 /* Pump.png */; };
 		1850BE1C1FC369E400F0862F /* Well.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1850BE1B1FC369DE00F0862F /* Well.plist */; };
 		1850BE1E1FC371D100F0862F /* Solar.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1850BE1D1FC371CD00F0862F /* Solar.plist */; };
 		186792101FA8B46A0012EC7D /* Model.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = 186792061FA8A9EB0012EC7D /* Model.scnassets */; };
@@ -30,6 +32,8 @@
 		180344241FBD93D000D282EA /* Well.scn */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; name = Well.scn; path = Model.scnassets/Well.scn; sourceTree = "<group>"; };
 		180344281FBD960A00D282EA /* Water Pump.scn */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; name = "Water Pump.scn"; path = "Model.scnassets/Water Pump.scn"; sourceTree = "<group>"; };
 		180FDBFE1FC1ED630025A472 /* Crop.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Crop.plist; sourceTree = "<group>"; };
+		1811E1171FD7DA230075CF27 /* Crop.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Crop.png; sourceTree = "<group>"; };
+		1811E1181FD7DA240075CF27 /* Pump.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Pump.png; sourceTree = "<group>"; };
 		184EBC551FC19FA700E0F4AE /* Pipe.scn */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; name = Pipe.scn; path = Model.scnassets/Pipe.scn; sourceTree = "<group>"; };
 		1850BE1B1FC369DE00F0862F /* Well.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Well.plist; sourceTree = "<group>"; };
 		1850BE1D1FC371CD00F0862F /* Solar.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Solar.plist; sourceTree = "<group>"; };
@@ -61,6 +65,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1811E1121FD7C7590075CF27 /* images */ = {
+			isa = PBXGroup;
+			children = (
+				1811E1171FD7DA230075CF27 /* Crop.png */,
+				1811E1181FD7DA240075CF27 /* Pump.png */,
+			);
+			path = images;
+			sourceTree = "<group>";
+		};
 		187FFAA21FA895BB001B1B3F = {
 			isa = PBXGroup;
 			children = (
@@ -104,6 +117,7 @@
 		1895C30C1FC186BD0061FC6A /* ObjectsData */ = {
 			isa = PBXGroup;
 			children = (
+				1811E1121FD7C7590075CF27 /* images */,
 				1895C30D1FC186EC0061FC6A /* Pump.plist */,
 				180FDBFE1FC1ED630025A472 /* Crop.plist */,
 				1850BE1B1FC369DE00F0862F /* Well.plist */,
@@ -183,6 +197,8 @@
 				18F620561FA9DF6000DAFBDB /* Textures in Resources */,
 				187FFAB91FA895BB001B1B3F /* LaunchScreen.storyboard in Resources */,
 				180FDBFF1FC1ED630025A472 /* Crop.plist in Resources */,
+				1811E11A1FD7DA250075CF27 /* Pump.png in Resources */,
+				1811E1191FD7DA250075CF27 /* Crop.png in Resources */,
 				186792101FA8B46A0012EC7D /* Model.scnassets in Resources */,
 				187FFAB61FA895BB001B1B3F /* Assets.xcassets in Resources */,
 				18E332B01FAB1D6C0043D129 /* Pump.scn in Resources */,
