@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		1809B6CD1FD9871B0059A27E /* Pipe.scn in Resources */ = {isa = PBXBuildFile; fileRef = 1809B6CC1FD986340059A27E /* Pipe.scn */; };
 		1809B6D51FD98F340059A27E /* Pipe.png in Resources */ = {isa = PBXBuildFile; fileRef = 1809B6D31FD98F340059A27E /* Pipe.png */; };
+		1809B6D71FD9A2F50059A27E /* Well.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 1809B6D61FD9A2F50059A27E /* Well.jpg */; };
 		180FDBFF1FC1ED630025A472 /* Crop.plist in Resources */ = {isa = PBXBuildFile; fileRef = 180FDBFE1FC1ED630025A472 /* Crop.plist */; };
 		1811E1191FD7DA250075CF27 /* Crop.png in Resources */ = {isa = PBXBuildFile; fileRef = 1811E1171FD7DA230075CF27 /* Crop.png */; };
 		1811E11A1FD7DA250075CF27 /* Pump.png in Resources */ = {isa = PBXBuildFile; fileRef = 1811E1181FD7DA240075CF27 /* Pump.png */; };
@@ -35,6 +36,7 @@
 		180344281FBD960A00D282EA /* Water Pump.scn */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; name = "Water Pump.scn"; path = "Model.scnassets/Water Pump.scn"; sourceTree = "<group>"; };
 		1809B6CC1FD986340059A27E /* Pipe.scn */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; name = Pipe.scn; path = Model.scnassets/Pipe.scn; sourceTree = "<group>"; };
 		1809B6D31FD98F340059A27E /* Pipe.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Pipe.png; path = ../../../../Resources/Well/Pipe.png; sourceTree = "<group>"; };
+		1809B6D61FD9A2F50059A27E /* Well.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Well.jpg; sourceTree = "<group>"; };
 		180FDBFE1FC1ED630025A472 /* Crop.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Crop.plist; sourceTree = "<group>"; };
 		1811E1171FD7DA230075CF27 /* Crop.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Crop.png; sourceTree = "<group>"; };
 		1811E1181FD7DA240075CF27 /* Pump.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Pump.png; sourceTree = "<group>"; };
@@ -74,6 +76,7 @@
 				1811E1171FD7DA230075CF27 /* Crop.png */,
 				1809B6D31FD98F340059A27E /* Pipe.png */,
 				1811E1181FD7DA240075CF27 /* Pump.png */,
+				1809B6D61FD9A2F50059A27E /* Well.jpg */,
 			);
 			path = images;
 			sourceTree = "<group>";
@@ -209,6 +212,7 @@
 				1850BE1C1FC369E400F0862F /* Well.plist in Resources */,
 				1809B6D51FD98F340059A27E /* Pipe.png in Resources */,
 				187FFAB41FA895BB001B1B3F /* Main.storyboard in Resources */,
+				1809B6D71FD9A2F50059A27E /* Well.jpg in Resources */,
 				1809B6CD1FD9871B0059A27E /* Pipe.scn in Resources */,
 				1895C30E1FC186ED0061FC6A /* Pump.plist in Resources */,
 				186792111FA8B4B80012EC7D /* Solar.scn in Resources */,

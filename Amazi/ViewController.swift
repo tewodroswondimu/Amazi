@@ -12,7 +12,7 @@ import ARKit
 class ViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, ARSCNViewDelegate {
     
     // All the menu items
-    let menuArray: [String] = ["Pump", "Crop", "Pipe"]
+    let menuArray: [String] = ["Pump", "Crop", "Well", "Pipe"]
     
     var selectedItem: String?
     var selectedNode = SCNNode()
@@ -43,6 +43,8 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
             ["name": "Crop", "price": "-", "details": "Maize, also known as corn, is a cereal grain first domesticated by indigenous peoples in southern Mexico about 10,000 years ago. The leafy stalk of the plant produces separate pollen and ovuliferous inflorescences or ears, which are fruits, yielding kernels or seeds.Maize has become a staple food in many parts of the world, with total production surpassing that of wheat or rice. However, not all of this maize is consumed directly by humans. Some of the maize production is used for corn ethanol, animal feed and other maize products, such as corn starch and corn syrup. The six major types of corn are dent corn, flint corn, pod corn, popcorn, flour corn, and sweet corn", "dimensions": "4x4"],
          "Pump":
             ["name": "Pump", "price": "$300", "details": "LIFAN Power USA prides itself in standing behind all LIFAN products with a industry leading 3 Year Limited Warranty and offers the highest level of service and support with a complete parts and service network. Ready to tackle the dirtiest jobs at the toughest job sites, Stanley trash water pumps are ready to go anywhere, with heavy-duty 1-1/4 in. steel roll cages and included wheel kit. Each model grinds debris up to half the diameter of its inlet/outlet, and has a large tank for longer run times.", "dimensions": "1x2x2"],
+         "Well":
+            ["name": "Well", "price": "$1,200", "details": "A water well is an excavation or structure created in the ground by digging, driving, boring, or drilling to access groundwater in underground aquifers. The well water is drawn by a pump, or using containers, such as buckets, that are raised mechanically or by hand. Wells were first constructed at least eight thousand years ago and historically vary in construction from a simple scoop in the sediment of a dry watercourse to the stepwells of India, the qanats of Iran, and the shadoofs and sakiehs of India. Placing a lining in the well shaft helps create stability and linings of wood or wickerwork date back at least as far as the Iron Age.", "dimensions": "3x1x12"],
          "Pipe":
             ["name": "Pipe", "price": "$10.0", "details": "A pipe is a tubular section or hollow cylinder, usually but not necessarily of circular cross-section, used mainly to convey substances which can flow — liquids and gases (fluids), slurries, powders and masses of small solids. It can also be used for structural applications; hollow pipe is far stiffer per unit weight than solid members. In common usage the words pipe and tube are usually interchangeable, but in industry and engineering, the terms are uniquely defined. Depending on the applicable standard to which it is manufactured, pipe is generally specified by a nominal diameter with a constant outside diameter (OD) and a schedule that defines the thickness. Tube is most often specified by the OD and wall thickness, but may be specified by any two of OD, inside diameter (ID), and wall thickness. Pipe is generally manufactured to one of several international and national industrial standards.[1] While similar standards exist for specific industry application tubing, tube is often made to custom sizes and a broader range of diameters and tolerances. Many industrial and government standards exist for the production of pipe and tubing. The term tube is also commonly applied to non-cylindrical sections, i.e., square or rectangular tubing. In general, pipe is the more common term in most of the world, whereas tube is more widely used in the United States.", "dimensions": "0.2x0.1x1.2"],
             
@@ -434,6 +436,8 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
                     objectDetails = self.details["Crop"]!
                 case "Pump":
                     objectDetails = self.details["Pump"]!
+                case "Well":
+                    objectDetails = self.details["Well"]!
                 case "Pipe":
                     objectDetails = self.details["Pipe"]!
                 default:
