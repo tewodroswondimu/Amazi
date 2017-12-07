@@ -134,7 +134,7 @@
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LMQ-ZN-nnk">
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LMQ-ZN-nnk">
                                 <rect key="frame" x="20" y="954" width="50" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="AdB-gk-Uj4"/>
@@ -295,6 +295,7 @@
                         <outlet property="detailsPrice" destination="tgS-3m-kan" id="Hn6-G0-i8R"/>
                         <outlet property="menuCollectionView" destination="Xxm-5e-ktv" id="WGZ-1X-QzD"/>
                         <outlet property="sceneView" destination="Myy-D2-CTH" id="xqS-vc-S9B"/>
+                        <outlet property="snapshotButton" destination="LMQ-ZN-nnk" id="amx-qT-a7h"/>
                         <outlet property="statusBlurViewDetails" destination="diJ-xG-wcy" id="moi-8b-lad"/>
                         <outlet property="statusDetails" destination="Wfb-zg-xvO" id="hge-aq-7dG"/>
                         <outlet property="statusLabel" destination="TOO-2M-UJW" id="7UZ-uK-bnA"/>

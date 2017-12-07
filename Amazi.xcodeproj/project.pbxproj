@@ -7,11 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1809B6CD1FD9871B0059A27E /* Pipe.scn in Resources */ = {isa = PBXBuildFile; fileRef = 1809B6CC1FD986340059A27E /* Pipe.scn */; };
+		1809B6D41FD98F340059A27E /* Well.png in Resources */ = {isa = PBXBuildFile; fileRef = 1809B6D21FD98F330059A27E /* Well.png */; };
+		1809B6D51FD98F340059A27E /* Pipe.png in Resources */ = {isa = PBXBuildFile; fileRef = 1809B6D31FD98F340059A27E /* Pipe.png */; };
 		180FDBFF1FC1ED630025A472 /* Crop.plist in Resources */ = {isa = PBXBuildFile; fileRef = 180FDBFE1FC1ED630025A472 /* Crop.plist */; };
 		1811E1191FD7DA250075CF27 /* Crop.png in Resources */ = {isa = PBXBuildFile; fileRef = 1811E1171FD7DA230075CF27 /* Crop.png */; };
 		1811E11A1FD7DA250075CF27 /* Pump.png in Resources */ = {isa = PBXBuildFile; fileRef = 1811E1181FD7DA240075CF27 /* Pump.png */; };
 		1850BE1C1FC369E400F0862F /* Well.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1850BE1B1FC369DE00F0862F /* Well.plist */; };
-		1850BE1E1FC371D100F0862F /* Solar.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1850BE1D1FC371CD00F0862F /* Solar.plist */; };
+		1850BE1E1FC371D100F0862F /* Pipe.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1850BE1D1FC371CD00F0862F /* Pipe.plist */; };
 		186792101FA8B46A0012EC7D /* Model.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = 186792061FA8A9EB0012EC7D /* Model.scnassets */; };
 		186792111FA8B4B80012EC7D /* Solar.scn in Resources */ = {isa = PBXBuildFile; fileRef = 1867920F1FA8B2050012EC7D /* Solar.scn */; };
 		187FFAAF1FA895BB001B1B3F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 187FFAAE1FA895BB001B1B3F /* AppDelegate.swift */; };
@@ -31,12 +34,14 @@
 		180344221FBD894100D282EA /* Crop.scn */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; name = Crop.scn; path = Model.scnassets/Crop.scn; sourceTree = "<group>"; };
 		180344241FBD93D000D282EA /* Well.scn */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; name = Well.scn; path = Model.scnassets/Well.scn; sourceTree = "<group>"; };
 		180344281FBD960A00D282EA /* Water Pump.scn */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; name = "Water Pump.scn"; path = "Model.scnassets/Water Pump.scn"; sourceTree = "<group>"; };
+		1809B6CC1FD986340059A27E /* Pipe.scn */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; name = Pipe.scn; path = Model.scnassets/Pipe.scn; sourceTree = "<group>"; };
+		1809B6D21FD98F330059A27E /* Well.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Well.png; path = ../../../../Resources/Well/Well.png; sourceTree = "<group>"; };
+		1809B6D31FD98F340059A27E /* Pipe.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Pipe.png; path = ../../../../Resources/Well/Pipe.png; sourceTree = "<group>"; };
 		180FDBFE1FC1ED630025A472 /* Crop.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Crop.plist; sourceTree = "<group>"; };
 		1811E1171FD7DA230075CF27 /* Crop.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Crop.png; sourceTree = "<group>"; };
 		1811E1181FD7DA240075CF27 /* Pump.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Pump.png; sourceTree = "<group>"; };
-		184EBC551FC19FA700E0F4AE /* Pipe.scn */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; name = Pipe.scn; path = Model.scnassets/Pipe.scn; sourceTree = "<group>"; };
 		1850BE1B1FC369DE00F0862F /* Well.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Well.plist; sourceTree = "<group>"; };
-		1850BE1D1FC371CD00F0862F /* Solar.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Solar.plist; sourceTree = "<group>"; };
+		1850BE1D1FC371CD00F0862F /* Pipe.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Pipe.plist; sourceTree = "<group>"; };
 		186792061FA8A9EB0012EC7D /* Model.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = Model.scnassets; sourceTree = "<group>"; };
 		1867920E1FA8B13D0012EC7D /* Textures */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Textures; sourceTree = "<group>"; };
 		1867920F1FA8B2050012EC7D /* Solar.scn */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; name = Solar.scn; path = Model.scnassets/Solar.scn; sourceTree = "<group>"; };
@@ -69,6 +74,8 @@
 			isa = PBXGroup;
 			children = (
 				1811E1171FD7DA230075CF27 /* Crop.png */,
+				1809B6D31FD98F340059A27E /* Pipe.png */,
+				1809B6D21FD98F330059A27E /* Well.png */,
 				1811E1181FD7DA240075CF27 /* Pump.png */,
 			);
 			path = images;
@@ -96,7 +103,7 @@
 				1895C30F1FC186FC0061FC6A /* Model */,
 				1895C30C1FC186BD0061FC6A /* ObjectsData */,
 				180344221FBD894100D282EA /* Crop.scn */,
-				184EBC551FC19FA700E0F4AE /* Pipe.scn */,
+				1809B6CC1FD986340059A27E /* Pipe.scn */,
 				18E332AF1FAB1D690043D129 /* Pump.scn */,
 				180344281FBD960A00D282EA /* Water Pump.scn */,
 				1867920F1FA8B2050012EC7D /* Solar.scn */,
@@ -121,7 +128,7 @@
 				1895C30D1FC186EC0061FC6A /* Pump.plist */,
 				180FDBFE1FC1ED630025A472 /* Crop.plist */,
 				1850BE1B1FC369DE00F0862F /* Well.plist */,
-				1850BE1D1FC371CD00F0862F /* Solar.plist */,
+				1850BE1D1FC371CD00F0862F /* Pipe.plist */,
 			);
 			path = ObjectsData;
 			sourceTree = "<group>";
@@ -203,10 +210,13 @@
 				187FFAB61FA895BB001B1B3F /* Assets.xcassets in Resources */,
 				18E332B01FAB1D6C0043D129 /* Pump.scn in Resources */,
 				1850BE1C1FC369E400F0862F /* Well.plist in Resources */,
+				1809B6D51FD98F340059A27E /* Pipe.png in Resources */,
 				187FFAB41FA895BB001B1B3F /* Main.storyboard in Resources */,
+				1809B6D41FD98F340059A27E /* Well.png in Resources */,
+				1809B6CD1FD9871B0059A27E /* Pipe.scn in Resources */,
 				1895C30E1FC186ED0061FC6A /* Pump.plist in Resources */,
 				186792111FA8B4B80012EC7D /* Solar.scn in Resources */,
-				1850BE1E1FC371D100F0862F /* Solar.plist in Resources */,
+				1850BE1E1FC371D100F0862F /* Pipe.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
