@@ -39,9 +39,9 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     
     let details: [String: [String: String]] =
         ["Crop":
-            ["name": "Crop", "price": "price", "details": "details", "dimensions": "dimensions"],
+            ["name": "Crop", "price": "$12.40", "details": "Maize, also known as corn, is a cereal grain first domesticated by indigenous peoples in southern Mexico about 10,000 years ago. The leafy stalk of the plant produces separate pollen and ovuliferous inflorescences or ears, which are fruits, yielding kernels or seeds.Maize has become a staple food in many parts of the world, with total production surpassing that of wheat or rice. However, not all of this maize is consumed directly by humans. Some of the maize production is used for corn ethanol, animal feed and other maize products, such as corn starch and corn syrup. The six major types of corn are dent corn, flint corn, pod corn, popcorn, flour corn, and sweet corn", "dimensions": "4x4"],
          "Pump":
-            ["name": "Pump", "price": "price", "details": "details", "dimensions": "dimensions"],
+            ["name": "Pump", "price": "price", "details": "LIFAN Power USA prides itself in standing behind all LIFAN products with a industry leading 3 Year Limited Warranty and offers the highest level of service and support with a complete parts and service network. Ready to tackle the dirtiest jobs at the toughest job sites, Stanley trash water pumps are ready to go anywhere, with heavy-duty 1-1/4 in. steel roll cages and included wheel kit. Each model grinds debris up to half the diameter of its inlet/outlet, and has a large tank for longer run times.", "dimensions": "1x2x2"],
          "Well":
             ["name": "Well", "price": "price", "details": "details", "dimensions": "dimensions"]
         ]

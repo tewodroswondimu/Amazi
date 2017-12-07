@@ -31,34 +31,5 @@
 			<string>0</string>
 		</dict>
 	</dict>
-	<dict>
-		<key>description</key>
-		<dict>
-			<key>name</key>
-			<string>Well</string>
-			<key>price</key>
-			<string>20</string>
-			<key>dimensions</key>
-			<string>2 cm radius, 1m length</string>
-		</dict>
-		<key>location</key>
-		<dict>
-			<key>x</key>
-			<string>0.25</string>
-			<key>y</key>
-			<string>-0.07</string>
-			<key>z</key>
-			<string>0.7</string>
-		</dict>
-		<key>orientation</key>
-		<dict>
-			<key>x</key>
-			<string>0</string>
-			<key>y</key>
-			<string>0</string>
-			<key>z</key>
-			<string>0</string>
-		</dict>
-	</dict>
 </array>
 </plist>

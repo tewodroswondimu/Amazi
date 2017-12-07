@@ -136,7 +136,6 @@
                             </collectionView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LMQ-ZN-nnk">
                                 <rect key="frame" x="20" y="954" width="50" height="50"/>
-                                <color key="backgroundColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="AdB-gk-Uj4"/>
                                     <constraint firstAttribute="width" constant="50" id="m3K-4U-l3a"/>

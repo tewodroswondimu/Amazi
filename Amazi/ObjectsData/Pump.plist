@@ -15,40 +15,11 @@
 		<key>location</key>
 		<dict>
 			<key>x</key>
-			<string>0.3101875</string>
+			<string>0.27</string>
 			<key>y</key>
 			<string>0</string>
 			<key>z</key>
 			<string>0.365875</string>
-		</dict>
-		<key>orientation</key>
-		<dict>
-			<key>x</key>
-			<string>0</string>
-			<key>y</key>
-			<string>0</string>
-			<key>z</key>
-			<string>0</string>
-		</dict>
-	</dict>
-	<dict>
-		<key>description</key>
-		<dict>
-			<key>name</key>
-			<string>Pump</string>
-			<key>price</key>
-			<string>20</string>
-			<key>dimensions</key>
-			<string>2 cm radius, 1m length</string>
-		</dict>
-		<key>location</key>
-		<dict>
-			<key>x</key>
-			<string>0.265875</string>
-			<key>y</key>
-			<string>0</string>
-			<key>z</key>
-			<string>0.63175</string>
 		</dict>
 		<key>orientation</key>
 		<dict>
